@@ -61,4 +61,8 @@ public class Cliente {
     public String getTipoCuenta() {
         return tipoCuenta;
     }
+
+    public String getNombreCompleto(){
+        return nombre + " " + apellido;
+    }
 }
