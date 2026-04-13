@@ -1,12 +1,18 @@
 import java.math.BigDecimal;
 
 public class Cliente {
-    private  String nombre;
+    private String username;
+    private String password;
+    private String permisos;
+    private String nombre;
     private String apellido;
     private String direccion;
     private String tipoCuenta;
     private BigDecimal saldo;
     private Cliente(Builder builder) {
+        this.username = builder.username;
+        this.password = builder.password;
+        this.permisos = builder.permisos;
         this.nombre = builder.nombre;
         this.apellido = builder.apellido;
         this.direccion = builder.direccion;
@@ -15,13 +21,20 @@ public class Cliente {
     }
 
     public static class Builder {
+        private final String username;
+        private final String password;
         private final String nombre;
         private final String apellido;
         private final String direccion;
+
+
+        private String permisos = "Cliente";
         private String tipoCuenta = "Caja Corriente";
         private BigDecimal saldo = BigDecimal.ZERO; // valor por defecto
 
-        public Builder(String nombre, String apellido, String direccion) {
+        public Builder(String username, String password, String nombre, String apellido, String direccion) {
+            this.username = username;
+            this.password = password;
             this.nombre = nombre;
             this.apellido = apellido;
             this.direccion = direccion;
@@ -32,12 +45,17 @@ public class Cliente {
             return this;
         }
 
+        public Builder permisos(String permisos){
+            this.permisos = permisos;
+            return this;
+        }
+
         public Builder tipoCuenta(String tipo) {
             this.tipoCuenta = tipo;
             return this;
         }
-        public Cliente build() {
-            return new Cliente(this);
+        public Cliente build(InterfaceClientela registro) {
+            return registro.cargar(this.username, new Cliente(this));
         }
     }
 

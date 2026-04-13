@@ -4,17 +4,24 @@ import java.util.HashMap;
 import java.math.BigDecimal;
 
 
-public class RegistroClientela {
+public class RegistroClientela implements InterfaceClientela {
     private HashMap<String, Cliente> clientelaMap;
 
+    public RegistroClientela() {
+        this.clientelaMap = new HashMap<>();
+    }
+
+    @Override
     public Cliente cargar(String username, Cliente cliente){
         return clientelaMap.put(username, cliente); // devuelve ultimo valor (o null si nuevo)
     }
 
+    @Override
     public Cliente buscarUsername(String username){
         return clientelaMap.get(username);
     }
 
+    @Override
     public BigDecimal getBalTotal(){
         return clientelaMap.values().stream()
                 .map(Cliente::getSaldo)
