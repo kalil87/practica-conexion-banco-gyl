@@ -3,5 +3,7 @@ public class Main {
         CUI objCUI = new CUI();
         objCUI.printLogo();
         UserLogin objUserLogin = new UserLogin(); // Se pueden cargar argumento username y password para hacer validaciones
+
+        objCUI.mainMenu();
     }
 }
