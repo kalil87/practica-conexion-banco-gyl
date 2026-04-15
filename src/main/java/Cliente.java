@@ -54,8 +54,11 @@ public class Cliente {
             this.tipoCuenta = tipo;
             return this;
         }
-        public Cliente build(InterfaceClientela registro) {
-            return registro.cargar(this.username, new Cliente(this));
+        public Cliente build(InterfaceClientela registro)
+        {
+            Cliente builtCliente = new Cliente(this);
+            registro.cargar((this.username), builtCliente);
+            return builtCliente;
         }
     }
 

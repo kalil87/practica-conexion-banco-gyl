@@ -4,6 +4,8 @@ import java.util.ArrayList;
 public class RegistroTransferencia implements InterfaceTransferencia {
     private ArrayList<Transferencia> auditoria;
 
+    public RegistroTransferencia() {this.auditoria = new ArrayList<>();}
+
     public boolean cargar(Transferencia log){
         return auditoria.add(log);
     }

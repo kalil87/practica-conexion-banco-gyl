@@ -4,18 +4,24 @@ public class UserLogin {
     private String user;
     private String pass;
     private boolean admin;
+    private Sucursal sucursal;
+    private Cliente cuenta;
 
     public UserLogin(){
         scannerLogIn();
         System.out.println("Bienvenido");
-        validateAdminPerms("admin");
     }
     public UserLogin(String username, String password){
         validateLogIn(username, password, scannerLogIn());
         this.user = username;
         this.pass = password;
-        this.admin = validateAdminPerms(username);
+        this.admin = true;
     }
+    public UserLogin(DataBase database){
+        validateLogInDB(database,scannerLogIn());
+        this.admin = validateAdminPerms(cuenta);
+    }
+
     public String getUser(){
         return user;
     }
@@ -24,8 +30,16 @@ public class UserLogin {
         return pass; //Why?
     }
 
+    public Cliente getCuenta() {
+        return cuenta;
+    }
+
     public boolean isAdmin() {
         return admin;
+    }
+
+    public Sucursal getSucursal() {
+        return sucursal;
     }
 
     private String[] scannerLogIn(){
@@ -48,10 +62,29 @@ public class UserLogin {
         }
         return false; //Por si salgo del bucle de validación
     }
-    private boolean validateAdminPerms(String username){
-        //Por el momento, todos tienen permiso de administrador
-        System.out.println("Tienes permisos de Administrador");
-        return true;
+
+    private boolean validateLogInDB(DataBase db, String[] inputs){
+        for (Sucursal iSucursal : db.getSucursalList()){
+            Cliente iCliente = iSucursal.registro.buscarUsername(inputs[0]);
+            if (iCliente != null){
+                if (iCliente.getPassword().equals(inputs[1])){
+                    System.out.println("Bienvenido " + iCliente.getNombreCompleto());
+                    this.sucursal = iSucursal;
+                    this.cuenta = iCliente;
+                    return true;
+                }
+                break; //Si existe usuario pero la contraseña está mal, entonces dejo de buscar
+            }
+        }
+        System.out.println("Credenciales incorrectas, intente nuevamente" + System.lineSeparator());
+        validateLogInDB(db, scannerLogIn());
+
+        return false;
+    }
+
+
+    private boolean validateAdminPerms(Cliente check){
+        return check.getPermisos().equals("ADMIN");
     }
 
 }

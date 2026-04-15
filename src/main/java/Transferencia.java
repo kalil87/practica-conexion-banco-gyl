@@ -32,14 +32,30 @@ public class Transferencia {
             return this;
         }
 
-        public Transferencia acreditar() {
+        public Transferencia acreditar(InterfaceTransferencia auditor) {
             //Validador?
             //Próximamente, solo en cines.
             receptor.sumarSaldo(monto);
             emisor.restarSaldo(monto);
-            return new Transferencia(this);
+            Transferencia builtTransferencia = new Transferencia(this);
+            auditor.cargar(builtTransferencia);
+            return builtTransferencia;
         }
     }
 
+    public Cliente getEmisor() {
+        return emisor;
+    }
 
+    public Cliente getReceptor() {
+        return receptor;
+    }
+
+    public BigDecimal getMonto() {
+        return monto;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
 }

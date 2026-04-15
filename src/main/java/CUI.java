@@ -5,33 +5,23 @@ public class CUI {
     // Command User Interface
     // Maneja el diseño y los prints de la interfaz
     private Sucursal sucursal;
+    private UserLogin activeUser;
     private DataReader dr;
+    private AuditReader ar;
+
+    public void setActiveUser(UserLogin user){
+        this.activeUser = user;
+        setSucursal(this.activeUser.getSucursal());
+    }
 
     public void setSucursal(Sucursal sucursal){
         this.sucursal = sucursal;
         this.dr = new DataReader(sucursal.registro);
+        this.ar = new AuditReader(sucursal.auditor);
     }
 
     public void printLogo(){
-        String logo= """
-                          ▒▒▒▒                         \s
-                          ▒▒░░▒▒▒▒▒▒▒▒▒▒▒▒             \s
-                          ▒▒▒▒░░░░░░░░░░░░▒▒▒▒         \s
-                        ▒▒░░░░░░░░░░░░░░░░░░░░▒▒       \s
-                      ▒▒░░▓▓░░░░░░░░░░░░░░░░░░░░▒▒     \s
-                  ▒▒▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒     \s
-                  ▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒  ▒▒ \s
-                  ▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒   \s
-                    ▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒     \s
-                      ▒▒▒▒░░░░░░░░░░░░░░░░░░░░▒▒       \s
-                          ▒▒░░░░░░░░░░░░░░░░▒▒         \s
-                          ▒▒▒▒░░░░░░░░░░░░▒▒▒▒         \s
-                          ▒▒░░▒▒▒▒▒▒▒▒▒▒▒▒░░▒▒         \s
-                          ▒▒▒▒▒▒        ▒▒▒▒▒▒         \s
-                
-                ░░BANCO CONSOLA DE TALLER POO GYL 2026░░
-                """;
-        System.out.println(logo);
+        System.out.println(sucursal.getLogo());
     }
 
     private void printOptionList(String[] options){
@@ -96,6 +86,7 @@ public class CUI {
             optionsMenu[i] = optionsLabel[i];
         }
 
+        printDataList(ar.auditToListString());
         switch (scanOptionList(optionsMenu)) {
             case 0 -> clientMenu();
             case 1 -> transferMenu();
@@ -105,7 +96,7 @@ public class CUI {
     }
 
     public void newClientMenu() {
-        String[] optionsLabel = {"Usuario: ", "Contraseña: ", "Nombre: ", "Edad: ", "Dirección: ", "Crear cuenta", "Volver"};
+        String[] optionsLabel = {"Usuario: ", "Contraseña: ", "Nombre: ", "Apellido: ", "Dirección: ", "Crear cuenta", "Volver"};
         String[] optionsMenu = new String[7];
         String[] optionsValues = new String[5];
         for (int i = 0; i < optionsLabel.length; i++) {
@@ -121,7 +112,9 @@ public class CUI {
         }
 
         if (selection == 5) {
-            //Cargar Cliente
+            new Cliente.Builder(optionsValues[0], optionsValues[1],optionsValues[2],optionsValues[3], optionsValues[4])
+                    .build(dr.source);
+            System.out.println("Cliente cargado con éxito" + System.lineSeparator());
             newClientMenu();
         } else {
             mainMenu();
@@ -146,7 +139,7 @@ public class CUI {
 
 
     public void mainMenu(){
-        String[] optionsMenu = {"Clientes", "Transferencias", "Añadir Nuevo Cliente", "Balance Total"};
+        String[] optionsMenu = {"Clientes", "Transferencias", "Añadir Nuevo Cliente", "Balance Total", "Cambiar cuenta"};
 
         printLogo();
         switch(scanOptionList(optionsMenu)){
