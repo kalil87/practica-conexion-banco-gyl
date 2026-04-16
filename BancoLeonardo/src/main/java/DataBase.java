@@ -32,6 +32,7 @@ public class DataBase {
     }
     private void cargarSucursales(){
         sucursalList.add(cargarCentral());
+        sucursalList.add(new Sucursal("Parque Patricios", "MonteAgudo 255", "16-04-2026"));
     }
 
     private void cargarDuplicados(){
