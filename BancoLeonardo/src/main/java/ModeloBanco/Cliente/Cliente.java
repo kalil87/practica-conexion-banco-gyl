@@ -1,3 +1,5 @@
+package ModeloBanco.Cliente;
+
 import java.math.BigDecimal;
 
 public class Cliente {

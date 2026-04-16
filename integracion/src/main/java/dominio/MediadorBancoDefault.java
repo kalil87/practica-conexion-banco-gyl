@@ -1,17 +1,20 @@
 package dominio;
 
-public class MediadorBancoDefault implements MediadorBanco{
-    private Banco bancoSanti;
-    private DataBase bancoLeo;
+import modelo.Banco;
+import ModeloBanco.Sucursal;
+import java.util.ArrayList;
 
-    public MediadorBancoDefault(Banco bancoSanti, DataBase bancoLeo) {
+public class MediadorBancoDefault implements MediadorBanco{
+    private final Banco bancoSanti;
+    private final ArrayList<ModeloBanco.Sucursal> sucursalesLeo;
+
+    public MediadorBancoDefault(Banco bancoSanti, ArrayList<ModeloBanco.Sucursal> sucursalesLeo) {
         this.bancoSanti = bancoSanti;
-        this.bancoLeo = bancoLeo;
+        this.sucursalesLeo = sucursalesLeo;
     }
 
     @Override
     public void transferir(String transferente, String transferido, double monto) {
-
     }
 
     @Override

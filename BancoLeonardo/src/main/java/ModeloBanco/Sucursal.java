@@ -1,4 +1,9 @@
+package ModeloBanco;
 
+import ModeloBanco.Cliente.InterfaceClientela;
+import ModeloBanco.Cliente.RegistroClientela;
+import ModeloBanco.Transferencia.InterfaceTransferencia;
+import ModeloBanco.Transferencia.RegistroTransferencia;
 
 public class Sucursal {
     private String nombre;

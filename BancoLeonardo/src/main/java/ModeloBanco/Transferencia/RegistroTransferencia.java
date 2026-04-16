@@ -1,3 +1,5 @@
+package ModeloBanco.Transferencia;
+
 import java.util.ArrayList;
 
 public class RegistroTransferencia implements InterfaceTransferencia {

@@ -1,3 +1,5 @@
+package ModeloBanco.Transferencia;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
