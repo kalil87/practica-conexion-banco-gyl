@@ -1,3 +1,6 @@
+import ModeloBanco.Transferencia.InterfaceTransferencia;
+import ModeloBanco.Transferencia.Transferencia;
+
 import java.util.ArrayList;
 
 public class AuditReader {

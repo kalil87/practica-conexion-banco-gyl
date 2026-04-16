@@ -1,3 +1,6 @@
+import ModeloBanco.Cliente.Cliente;
+import ModeloBanco.Cliente.InterfaceClientela;
+
 import java.util.ArrayList;
 
 public class DataReader {

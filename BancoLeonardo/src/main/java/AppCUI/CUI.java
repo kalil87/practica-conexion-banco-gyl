@@ -1,3 +1,6 @@
+import ModeloBanco.*;
+import ModeloBanco.Cliente.Cliente;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -114,7 +117,7 @@ public class CUI {
         if (selection == 5) {
             new Cliente.Builder(optionsValues[0], optionsValues[1],optionsValues[2],optionsValues[3], optionsValues[4])
                     .build(dr.source);
-            System.out.println("Cliente cargado con éxito" + System.lineSeparator());
+            System.out.println("Sucursal.Cliente cargado con éxito" + System.lineSeparator());
             newClientMenu();
         } else {
             mainMenu();
@@ -139,7 +142,7 @@ public class CUI {
 
 
     public void mainMenu(){
-        String[] optionsMenu = {"Clientes", "Transferencias", "Añadir Nuevo Cliente", "Balance Total", "Cambiar cuenta"};
+        String[] optionsMenu = {"Clientes", "Transferencias", "Añadir Nuevo Sucursal.Cliente", "Balance Total", "Cambiar cuenta"};
 
         printLogo();
         switch(scanOptionList(optionsMenu)){

@@ -1,3 +1,7 @@
+import ModeloBanco.*;
+import ModeloBanco.Cliente.Cliente;
+import ServicioDataBase.DataBaseInjector;
+
 import java.util.Scanner;
 
 public class UserLogin {
@@ -17,7 +21,7 @@ public class UserLogin {
         this.pass = password;
         this.admin = true;
     }
-    public UserLogin(DataBase database){
+    public UserLogin(DataBaseInjector database){
         validateLogInDB(database,scannerLogIn());
         this.admin = validateAdminPerms(cuenta);
     }
@@ -63,7 +67,7 @@ public class UserLogin {
         return false; //Por si salgo del bucle de validación
     }
 
-    private boolean validateLogInDB(DataBase db, String[] inputs){
+    private boolean validateLogInDB(DataBaseInjector db, String[] inputs){
         for (Sucursal iSucursal : db.getSucursalList()){
             Cliente iCliente = iSucursal.registro.buscarUsername(inputs[0]);
             if (iCliente != null){
