@@ -5,16 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" name="Changes" comment="FIX/ 16 - 04 /&#10;Arreglo de importaciones en BancoLeonardo">
-      <change afterPath="$PROJECT_DIR$/BancoLeonardo/src/main/java/ModeloBanco/Transferencia/TipoTransaccion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integracion/src/main/java/dominio/AdaptadorBanco.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integracion/src/main/java/dominio/AdaptadorBancoSantiago.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BancoLeonardo/src/main/java/ModeloBanco/Transferencia/Transferencia.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoLeonardo/src/main/java/ModeloBanco/Transferencia/Transferencia.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BancoLeonardo/src/main/java/AppCUI/AuditReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoLeonardo/src/main/java/AppCUI/AuditReader.java" afterDir="false" />
     </list>
-    <list id="3867bc3a-88c1-431b-b18b-f9ee6b753899" name="Changes by strillo" comment="">
-      <change beforePath="$PROJECT_DIR$/integracion/src/main/java/dominio/MediadorBanco.java" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/src/main/java/dominio/MediadorBanco.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integracion/src/main/java/dominio/MediadorBancoDefault.java" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/src/main/java/dominio/MediadorBancoDefault.java" afterDir="false" />
-    </list>
+    <list id="3867bc3a-88c1-431b-b18b-f9ee6b753899" name="Changes by strillo" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -70,7 +64,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "devLeno",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -83,6 +77,20 @@
     "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.com.intellij.cwm.plugin.common.options.CodeWithMeColorsPage"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="BankTallerPOOGyL" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" name="Changes" comment="" />

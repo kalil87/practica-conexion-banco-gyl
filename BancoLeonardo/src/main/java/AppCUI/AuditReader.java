@@ -13,11 +13,26 @@ public class AuditReader {
     }
 
     public String logToString(Transferencia source){
-        switch sourc
-        return source.getEmisor().getNombreCompleto() + " -> "
-                + source.getReceptor().getNombreCompleto() + "| $"
-                + source.getMonto().toString() + " | "
-                + source.getFecha();
+        switch (source.getTransaccion()){
+            case TRANSFERENCIA ->{
+                return source.getEmisor().getNombreCompleto() + " -> "
+                        + source.getReceptor().getNombreCompleto() + "| $"
+                        + source.getMonto().toString() + " | "
+                        + source.getFecha();
+            }
+            case RETIRO -> {
+                return source.getEmisor().getNombreCompleto() + " Retira: $"
+                        + source.getMonto().toString() + " | "
+                        + source.getFecha();
+            }
+            case DEPOSITO -> {
+                return source.getReceptor().getNombreCompleto() + " Deposita: $"
+                        + source.getMonto().toString() + " | "
+                        + source.getFecha();
+            }
+
+        }
+        return "Error al leer Tipo de Transacción | " + source.getFecha();
     }
 
     public ArrayList<String> auditToListString(){
