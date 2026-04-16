@@ -10,8 +10,8 @@ public class DataBase {
     public DataBase(){
         sucursalList = new ArrayList<>();
         cargarSucursales();
-        cargarTests();
-        cargarDuplicados();
+        //cargarTests();
+        //cargarDuplicados();
         cargarClientes(getCentral());
     }
 
@@ -79,7 +79,7 @@ public class DataBase {
                     .saldo(BigDecimal.valueOf(8008))
                     .build(iSucursal.registro);
 
-            new Cliente.Builder("admin doble", "admin", "ADMIN", "DOBLE", "TESTSET")
+            new Cliente.Builder("adminadmin", "admin", "ADMIN", "DOBLE", "TESTSET")
                     .tipoCuenta("ADMIN")
                     .permisos("ADMIN")
                     .saldo(BigDecimal.valueOf(8888))
