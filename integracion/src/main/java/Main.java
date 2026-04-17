@@ -1,8 +1,4 @@
-import java.util.ArrayList;
-import java.util.Scanner;
-import dominio.*;
-import leo.AppCUI.CUI;
-import leo.AppCUI.UserLogin;
+import dominio.MediadorBancos;
 import leo.ServicioDataBase.DataBaseInjector;
 import santiago.modelo.Banco;
 import santiago.modelo.Cuenta;
@@ -10,20 +6,19 @@ import santiago.modelo.Sucursal;
 import santiago.servicio.InicializadorBanco;
 import santiago.ui.Menu;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
         boolean isRunning = true;
         Scanner teclado = new Scanner(System.in);
         MediadorBancos mediador = new MediadorBancos();
+
         DataBaseInjector bancoLeo = new DataBaseInjector();
         Banco bancoSanti = Banco.getInstancia();
 
-
-
         InicializadorBanco.inicializarBanco(bancoSanti);
-
-
-        //Inicializa
         ArrayList<santiago.modelo.Sucursal> sucursalesAdaptadas = mediador.getAdapterSantiago().adaptarSucursalesDeLeo(bancoLeo.getSucursalList());
         for (santiago.modelo.Sucursal sucursalIterada : sucursalesAdaptadas) {
             bancoSanti.crearSucursal(sucursalIterada.getNombre());
@@ -55,29 +50,8 @@ public class Main {
             int opcion = teclado.nextInt();
 
             switch (opcion) {
-                case 1 -> {
-                    boolean leoIsRunning = true;
-
-                    CUI objCUI = new CUI();
-                    while (leoIsRunning) {
-                        UserLogin objUserLogin = new UserLogin(bancoLeo);
-                        objCUI.setActiveUser(objUserLogin);
-                        objCUI.setSucursalList(bancoLeo.getSucursalList());
-
-                        if (objUserLogin.isAdmin()) {
-                            leoIsRunning = objCUI.mainMenu();
-                        } else {
-                            System.out.println("Solo administradores por el momento" + System.lineSeparator());
-                            leoIsRunning = false;
-                        }
-                    }
-                }
-                case 2 -> {
-                    Menu menu = new Menu(bancoSanti);
-
-
-                    menu.mostrarMenuBanco();
-                }
+                case 1 -> {new leo.App(bancoLeo);}
+                case 2 -> {new Menu(bancoSanti).mostrarMenuBanco();}
                 case 0 -> isRunning = false;
                 default -> System.out.println("\nOpción inválida\n");
             }

@@ -170,14 +170,25 @@ public class CUI {
 
         scanOptionList(optionsMenu);
         mainMenu();
-//      Se que comentar código está mal pero me ahorro el switch redundante
-//        switch (scanOptionList(optionsMenu)) {
-//            case 0 -> mainMenu();
-//        }
     }
 
+    public boolean adminMenu(){
+        String[] optionsMenu = {"Sucursales","Clientes", "Transferencias", "Añadir Nuevo Cliente", "Balance Total", "Cambiar cuenta", "Salir"};
+
+        printLogo();
+        switch(scanOptionList(optionsMenu)){
+            case 0 -> sucursalMenu();
+            case 1 -> clientMenu();
+            case 2 -> transferMenu();
+            case 3 -> newClientMenu();
+            case 4 -> balMenu();
+            case 5 -> {return true;}
+        }
+        return false;
+    }
 
     public boolean mainMenu(){
+        if (activeUser.isAdmin()) {return adminMenu();}
         String[] optionsMenu = {"Sucursales","Clientes", "Transferencias", "Añadir Nuevo Cliente", "Balance Total", "Cambiar cuenta", "Salir"};
 
         printLogo();
