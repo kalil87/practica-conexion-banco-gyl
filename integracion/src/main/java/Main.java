@@ -8,6 +8,8 @@ import leo.AppCUI.UserLogin;
 import leo.ServicioDataBase.DataBaseInjector;
 
 import santiago.modelo.Banco;
+import santiago.modelo.Cuenta;
+import santiago.modelo.Sucursal;
 import santiago.servicio.InicializadorBanco;
 import santiago.ui.Menu;
 
@@ -49,7 +51,26 @@ public class Main {
                 InicializadorBanco.inicializarBanco(bancoSanti);
                 ArrayList<santiago.modelo.Sucursal> sucursalesTraducidas = mediador.getAdapterSantiago().adaptarSucursalesDeLeo(bancoLeo.getSucursalList());
                 for (santiago.modelo.Sucursal sucursalIterada : sucursalesTraducidas) {
-                    bancoSanti.crearSucursal(sucursalIterada.getNombre());
+                    if (bancoSanti.buscarSucursal(sucursalIterada.getNombre()) == null) {
+                        bancoSanti.crearSucursal(sucursalIterada.getNombre());
+                    }
+
+                    Sucursal sucursalDestino = bancoSanti.buscarSucursal(sucursalIterada.getNombre());
+                    for (Cuenta cuentaIterada : sucursalIterada.getCuentas()) {
+                        if (sucursalDestino.buscarCuentaSucursal(cuentaIterada.getEmail()) == null) {
+                            Cuenta cuentaNueva = sucursalDestino.crearCuenta(
+                                    cuentaIterada.getNombre(),
+                                    cuentaIterada.getEmail(),
+                                    cuentaIterada.getPin(),
+                                    cuentaIterada.isAdmin(),
+                                    cuentaIterada.getTipoCuenta()
+                            );
+
+                            if (cuentaNueva != null && cuentaIterada.getSaldo() > 0) {
+                                cuentaNueva.agregarSaldo(cuentaIterada.getSaldo());
+                            }
+                        }
+                    }
                 }
 
                 menu.mostrarMenuBanco();

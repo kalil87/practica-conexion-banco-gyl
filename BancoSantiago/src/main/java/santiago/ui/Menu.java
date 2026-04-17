@@ -74,16 +74,18 @@ public class Menu {
 
         switch (opcion) {
             case 1:
-                mostrarResultadoMetodo(
-                        registrarCuenta(),
-                        "\nCuenta creada con éxito. Bienvenido, " + sesionActiva.getNombre() + "\n",
-                        "\nYa existe una cuenta creada con el email ingresado\n");
+                if (registrarCuenta()) {
+                    System.out.println("\nCuenta creada con éxito. Bienvenido, " + sesionActiva.getNombre() + "\n");
+                } else {
+                    System.out.println("\nYa existe una cuenta creada con el email ingresado\n");
+                }
                 break;
             case 2:
-                mostrarResultadoMetodo(
-                        iniciarSesion(),
-                        "\nSesión iniciada con éxito. Bienvenido, " + sesionActiva.getNombre() + "\n",
-                        "\nEl email y/o el pin ingresados son incorrectos\n");
+                if (iniciarSesion()) {
+                    System.out.println("\nSesión iniciada con éxito. Bienvenido, " + sesionActiva.getNombre() + "\n");
+                } else {
+                    System.out.println("\nEl email y/o el pin ingresados son incorrectos\n");
+                }
                 break;
             case 3:
                 salirSucursal();
@@ -305,7 +307,11 @@ public class Menu {
         String emailCuentaBuscada = teclado.nextLine();
 
         Cuenta cuentaBuscada = banco.buscarCuentaBanco(emailCuentaBuscada);
-        System.out.println(cuentaBuscada);
+        if (cuentaBuscada == null) {
+            System.out.println("\nNo se encontró una cuenta con el email ingresado\n");
+        } else {
+            System.out.println(cuentaBuscada);
+        }
     }
 
     private void mostrarDatosSucursal() {
@@ -314,6 +320,11 @@ public class Menu {
         String nombreSucursalBuscada = teclado.nextLine();
 
         Sucursal sucursalBuscada = banco.buscarSucursal(nombreSucursalBuscada);
+
+        if (sucursalBuscada == null) {
+            System.out.println("\nNo se encontró una sucursal con el nombre ingresado\n");
+            return;
+        }
 
         for (Cuenta cuenta : sucursalBuscada.getCuentas()) {
             System.out.println(cuenta);

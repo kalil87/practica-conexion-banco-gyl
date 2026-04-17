@@ -35,10 +35,11 @@ public class AdaptadorABancoSantiago {
     }
 
     public Cuenta adaptarClienteDeLeo(santiago.modelo.Sucursal sucursalDestino, Cliente clienteLeo) {
+        boolean cuentaAdmin = clienteLeo.getPermisos().equalsIgnoreCase("ADMIN") || clienteLeo.getTipoCuenta().equalsIgnoreCase("ADMIN");
         Cuenta wrapperCliente = sucursalDestino.crearCuenta(clienteLeo.getNombre(),
                 clienteLeo.getUsername() + "@bancoleo.com",
                 4040,
-                false,
+                cuentaAdmin,
                 TipoCuenta.BANCO_EXTERNO);
         if (clienteLeo.getSaldo().compareTo(BigDecimal.ZERO) > 0) {
             wrapperCliente.agregarSaldo(
