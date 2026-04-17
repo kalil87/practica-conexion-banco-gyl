@@ -19,15 +19,12 @@ public class AdaptadorABancoSantiago {
 
                 Cuenta wrapperCuenta = adaptarClienteDeLeo(wrapperSucursal, indexCliente);
 
-                //Logica de Historial Transacciones
-
                 for (Transferencia indexTransferencia : indexSucursal.auditor.getAuditoria()){
                     if (indexTransferencia.getEmisor().getUsername().equals(indexCliente.getUsername()) || indexTransferencia.getReceptor().getUsername().equals(indexCliente.getUsername()))
                     {
                         adaptarTransferenciaDeLeo(wrapperCuenta, indexTransferencia);
                     }
                 }
-
             }
             listaWrapper.add(wrapperSucursal);
         }

@@ -17,7 +17,26 @@ public class AdaptadorABancoLeo {
 
         for (santiago.modelo.Sucursal sucursalIterada : sucursalesSanti) {
             if (!sucursalIterada.getNombre().contains("[Banco Leo] ")) {
-                leo.ModeloBanco.Sucursal sucursalTraducida = new leo.ModeloBanco.Sucursal("[Banco Santi] " + sucursalIterada.getNombre(), sucursalIterada.getNombre(), "Dato desconocido");
+                leo.ModeloBanco.Sucursal sucursalTraducida = new leo.ModeloBanco.Sucursal("[Banco Santi] " + sucursalIterada.getNombre(), sucursalIterada.getNombre(), "Dato desconocido",
+                        """
+                                            ██████████████         \s
+                                        ████              ████     \s
+                                      ██                      ██   \s
+                                    ██            ██            ██ \s
+                                    ██        ██████████        ██ \s
+                                ██▓▓        ██    ██    ██        ██
+                                ████        ██    ██              ██
+                                ████        ██    ██              ██
+                                ██▓▓          ██████████          ██
+                                ██▓▓              ██    ██        ██
+                                ████              ██    ██        ██
+                                ██▓▓        ██    ██    ██        ██
+                                    ██        ██████████        ██ \s
+                                    ██            ██            ██ \s
+                                      ██                      ██   \s
+                                        ████              ████     \s
+                                            ██████████████         \s
+                                [RED BANCO SANTIAGO]\s""" + sucursalIterada.getNombre() + System.lineSeparator());
 
                 for (Cuenta cuentaIterada : sucursalIterada.getCuentas()) {
                     adaptarCuentaACliente(cuentaIterada, sucursalTraducida);
