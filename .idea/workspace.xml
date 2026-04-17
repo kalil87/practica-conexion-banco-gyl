@@ -4,41 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" name="Changes" comment="FIX/ 16 - 04 /&#10;Arreglo de importaciones en BancoLeonardo">
-      <change afterPath="$PROJECT_DIR$/integracion/src/main/java/dominio/leo/AdaptadorBancoLeo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integracion/src/main/java/dominio/leo/InterfaceBancoLeo.java" afterDir="false" />
+    <list default="true" id="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" name="Changes" comment="FEATURE/ 16 - 04 /&#10;Creacion AdaptadorBancoLeo.java&#10;Se asigna packages leo y santiago a sus respectivos proyectos.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BancoLeonardo/src/main/java/AppCUI/AuditReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/AuditReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BancoLeonardo/src/main/java/AppCUI/CUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/CUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BancoLeonardo/src/main/java/AppCUI/DataReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/DataReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BancoLeonardo/src/main/java/AppCUI/UserLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/UserLogin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BancoLeonardo/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BancoLeonardo/src/main/java/ModeloBanco/Cliente/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/ModeloBanco/Cliente/Cliente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BancoLeonardo/src/main/java/ModeloBanco/Cliente/InterfaceClientela.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/ModeloBanco/Cliente/InterfaceClientela.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BancoLeonardo/src/main/java/ModeloBanco/Cliente/RegistroClientela.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/ModeloBanco/Cliente/RegistroClientela.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BancoLeonardo/src/main/java/ModeloBanco/Sucursal.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/ModeloBanco/Sucursal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BancoLeonardo/src/main/java/ModeloBanco/Transferencia/InterfaceTransferencia.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/ModeloBanco/Transferencia/InterfaceTransferencia.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BancoLeonardo/src/main/java/ModeloBanco/Transferencia/RegistroTransferencia.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/ModeloBanco/Transferencia/RegistroTransferencia.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BancoLeonardo/src/main/java/ModeloBanco/Transferencia/TipoTransaccion.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/ModeloBanco/Transferencia/TipoTransaccion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BancoLeonardo/src/main/java/ModeloBanco/Transferencia/Transferencia.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/ModeloBanco/Transferencia/Transferencia.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BancoLeonardo/src/main/java/ServicioDataBase/DataBaseInjector.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/ServicioDataBase/DataBaseInjector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BancoSantiago/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoSantiago/src/main/java/santiago/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BancoSantiago/src/main/java/modelo/Banco.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoSantiago/src/main/java/santiago/modelo/Banco.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BancoSantiago/src/main/java/modelo/Cuenta.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoSantiago/src/main/java/santiago/modelo/Cuenta.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BancoSantiago/src/main/java/modelo/Estado.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoSantiago/src/main/java/santiago/modelo/Estado.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BancoSantiago/src/main/java/modelo/Sucursal.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoSantiago/src/main/java/santiago/modelo/Sucursal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BancoSantiago/src/main/java/modelo/TipoCuenta.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoSantiago/src/main/java/santiago/modelo/TipoCuenta.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BancoSantiago/src/main/java/modelo/TipoTransaccion.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoSantiago/src/main/java/santiago/modelo/TipoTransaccion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BancoSantiago/src/main/java/modelo/Transaccion.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoSantiago/src/main/java/santiago/modelo/Transaccion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BancoSantiago/src/main/java/servicio/InicializadorBanco.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoSantiago/src/main/java/santiago/servicio/InicializadorBanco.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BancoSantiago/src/main/java/servicio/OperacionesBancarias.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoSantiago/src/main/java/santiago/servicio/OperacionesBancarias.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BancoSantiago/src/main/java/ui/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoSantiago/src/main/java/santiago/ui/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integracion/src/main/java/dominio/AdaptadorBanco.java" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/src/main/java/dominio/santiago/InterfaceBancoSantiago.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integracion/src/main/java/dominio/AdaptadorBancoSantiago.java" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/src/main/java/dominio/santiago/AdaptadorBancoSantiago.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integracion/src/main/java/dominio/MediadorBanco.java" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/src/main/java/dominio/MediadorBanco.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integracion/src/main/java/dominio/MediadorBancoDefault.java" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/src/main/java/dominio/MediadorBancoDefault.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integracion/src/main/java/dominio/leo/AdaptadorBancoLeo.java" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/src/main/java/dominio/santiago/AdaptadorABancoSantiago.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integracion/src/main/java/dominio/leo/InterfaceBancoLeo.java" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/src/main/java/dominio/santiago/InterfaceABancoSantiago.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integracion/src/main/java/dominio/santiago/AdaptadorBancoSantiago.java" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/src/main/java/dominio/leo/AdaptadorAABancoLeo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integracion/src/main/java/dominio/santiago/InterfaceBancoSantiago.java" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/src/main/java/dominio/leo/InterfaceABancoLeo.java" afterDir="false" />
     </list>
-    <list id="3867bc3a-88c1-431b-b18b-f9ee6b753899" name="Changes by strillo" comment="" />
+    <list id="3867bc3a-88c1-431b-b18b-f9ee6b753899" name="Changes by strillo" comment="">
+      <change beforePath="$PROJECT_DIR$/BancoSantiago/src/main/java/santiago/modelo/Cuenta.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoSantiago/src/main/java/santiago/modelo/Cuenta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BancoSantiago/src/main/java/santiago/modelo/Transaccion.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoSantiago/src/main/java/santiago/modelo/Transaccion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integracion/src/main/java/dominio/leo/AdaptadorBancoLeo.java" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/src/main/java/dominio/santiago/AdaptadorABancoSantiago.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integracion/src/main/java/dominio/santiago/AdaptadorBancoSantiago.java" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/src/main/java/dominio/leo/AdaptadorAABancoLeo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integracion/src/main/java/dominio/santiago/InterfaceBancoSantiago.java" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/src/main/java/dominio/leo/InterfaceABancoLeo.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -73,6 +52,43 @@
     &quot;accountId&quot;: &quot;4101cab1-70b3-4aa4-9a67-6427daf52bc0&quot;
   }
 }</component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/integracion/src/main/java/dominio/leo/AdaptadorAABancoLeo.java">
+      <ranges>
+        <range start1="0" end1="1" start2="0" end2="1" changelist="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" />
+        <range start1="2" end1="3" start2="2" end2="6" changelist="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" />
+        <range start1="4" end1="6" start2="7" end2="8" changelist="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" />
+        <range start1="7" end1="11" start2="9" end2="10" changelist="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" />
+        <range start1="12" end1="14" start2="11" end2="27" changelist="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" />
+        <range start1="15" end1="19" start2="28" end2="38" changelist="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" />
+        <range start1="20" end1="20" start2="39" end2="40" changelist="3867bc3a-88c1-431b-b18b-f9ee6b753899" />
+        <range start1="21" end1="23" start2="41" end2="42" changelist="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/integracion/src/main/java/dominio/leo/InterfaceABancoLeo.java">
+      <ranges>
+        <range start1="0" end1="1" start2="0" end2="1" changelist="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" />
+        <range start1="3" end1="3" start2="3" end2="5" changelist="3867bc3a-88c1-431b-b18b-f9ee6b753899" />
+        <range start1="4" end1="6" start2="6" end2="8" changelist="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/integracion/src/main/java/dominio/santiago/AdaptadorABancoSantiago.java">
+      <ranges>
+        <range start1="0" end1="1" start2="0" end2="1" changelist="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" />
+        <range start1="3" end1="6" start2="3" end2="6" changelist="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" />
+        <range start1="10" end1="11" start2="10" end2="11" changelist="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" />
+        <range start1="12" end1="13" start2="12" end2="13" changelist="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" />
+        <range start1="15" end1="18" start2="15" end2="17" changelist="3867bc3a-88c1-431b-b18b-f9ee6b753899" />
+        <range start1="19" end1="20" start2="18" end2="19" changelist="3867bc3a-88c1-431b-b18b-f9ee6b753899" />
+        <range start1="21" end1="26" start2="20" end2="21" changelist="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" />
+        <range start1="27" end1="32" start2="22" end2="22" changelist="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" />
+        <range start1="33" end1="34" start2="23" end2="28" changelist="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" />
+        <range start1="35" end1="36" start2="29" end2="30" changelist="3867bc3a-88c1-431b-b18b-f9ee6b753899" />
+        <range start1="40" end1="40" start2="34" end2="70" changelist="3867bc3a-88c1-431b-b18b-f9ee6b753899" />
+        <range start1="41" end1="42" start2="71" end2="72" changelist="3867bc3a-88c1-431b-b18b-f9ee6b753899" />
+      </ranges>
+    </file>
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 7

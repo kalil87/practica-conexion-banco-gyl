@@ -19,4 +19,8 @@ public class Transaccion {
                 "Origen: " + (origen != null ? origen.getEmail() : "Ninguno") + '\n' +
                 "Destino: " + (destino != null ? destino.getEmail() : "Ninguno") + '\n';
     }
+
+    public TipoTransaccion getTipoTransaccion() {
+        return tipoTransaccion;
+    }
 }

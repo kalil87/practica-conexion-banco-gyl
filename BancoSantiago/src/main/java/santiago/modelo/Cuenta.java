@@ -87,6 +87,14 @@ public class Cuenta {
         return admin;
     }
 
+    public Sucursal getSucursal() {
+        return sucursal;
+    }
+
+    public TipoCuenta getTipoCuenta() {
+        return tipoCuenta;
+    }
+
     public List<Transaccion> getHistorialTransacciones() {
         return Collections.unmodifiableList(historialTransacciones);
     }
