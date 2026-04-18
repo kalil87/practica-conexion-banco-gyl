@@ -20,17 +20,26 @@ public class Main {
        procesarIntegracion();
 
         while (isRunning) {
-            System.out.println("""
+            try{
+                System.out.println("""
                 ¿A qué banco le gustaría ingresar? Ingrese 0 para salir
                 1) Banco Leonardo
                 2) Banco Santiago""");
-            int opcion = TECLADO.nextInt();
 
-            switch (opcion) {
-                case 1 -> new leo.App(BANCO_LEO);
-                case 2 -> new Menu(BANCO_SANTI).mostrarMenuBanco();
-                case 0 -> isRunning = false;
-                default -> System.out.println("\nOpción inválida\n");
+                String input = TECLADO.nextLine();
+                if (!input.matches("\\d+")) {
+                    throw new IllegalArgumentException("(Main, main) la opción elegida no es un número");
+                }
+                int opcion = Integer.parseInt(input);
+
+                switch (opcion) {
+                    case 1 -> new leo.App(BANCO_LEO);
+                    case 2 -> new Menu(BANCO_SANTI).mostrarMenuBanco();
+                    case 0 -> isRunning = false;
+                    default -> System.out.println("\nOpción inválida\n");
+                }
+            } catch (IllegalArgumentException datoInvalido) {
+                System.out.println("Error de dato inválido: " + datoInvalido.getMessage());
             }
         }
     }

@@ -46,16 +46,12 @@ public class Menu {
                         }
                     } catch (IllegalArgumentException datoInvalido) {
                         System.out.println("Error de dato inválido: " + datoInvalido.getMessage());
-                        teclado.nextLine();
                     }  catch (IllegalStateException estadoInvalido) {
                         System.out.println("Error de estado inválido: " + estadoInvalido.getMessage());
-                        teclado.nextLine();
                     } catch (RuntimeException tiempoEjecucion) {
                         System.out.println("Error de tiempo de ejecución: " + tiempoEjecucion.getMessage());
-                        teclado.nextLine();
                     } catch (Exception error) {
                         System.out.println("Error: " + error.getMessage());
-                        teclado.nextLine();
                     }
                 }
             }
@@ -69,8 +65,7 @@ public class Menu {
                 2) Iniciar sesión
                 3) Salir de la sucursal""");
 
-        int opcion = teclado.nextInt();
-        teclado.nextLine();
+        int opcion = procesarInput();
 
         switch (opcion) {
             case 1:
@@ -106,8 +101,7 @@ public class Menu {
                 6) Cerrar sesión
                 7) Salir de la sucursal""");
 
-        int opcion = teclado.nextInt();
-        teclado.nextLine();
+        int opcion = procesarInput();
 
         switch (opcion) {
             case 1:
@@ -157,8 +151,7 @@ public class Menu {
                 7) Cerrar sesión
                 8) Salir de la sucursal""");
 
-        int opcion = teclado.nextInt();
-        teclado.nextLine();
+        int opcion = procesarInput();
 
         switch (opcion) {
             case 1:
@@ -211,14 +204,14 @@ public class Menu {
 
         System.out.println("\nIngrese su pin\n");
 
-        int pinNuevo = teclado.nextInt();
+        int pinNuevo = procesarInput();
 
         System.out.println("""
                 Indique el tipo de cuenta que le gustaría crear:
                 1) Caja de ahorro
                 2) Cuenta corriente""");
 
-        int opcionCuenta = teclado.nextInt();
+        int opcionCuenta = procesarInput();
 
         switch (opcionCuenta) {
             case 1 -> tipoCuentaNuevo = TipoCuenta.CAJA_AHORRO;
@@ -236,6 +229,14 @@ public class Menu {
         System.out.println("\nIngrese el nombre de la nueva sucursal\n");
         String nombreNuevaSucursal = teclado.nextLine();
         banco.crearSucursal(nombreNuevaSucursal);
+    }
+
+    public int procesarInput() {
+        String input = teclado.nextLine();
+        if (!input.matches("\\d+")) {
+            throw new IllegalArgumentException("(Menu, procesarInput) la opción elegida no es un número");
+        }
+        return Integer.parseInt(input);
     }
 
     private double procesarDeposito() {
@@ -300,7 +301,7 @@ public class Menu {
 
         System.out.println("\nIngrese su pin\n");
 
-        int pinSesion = teclado.nextInt();
+        int pinSesion = procesarInput();
         Cuenta cuentaSesion = sucursalActiva.buscarCuentaSucursal(emailSesion);
 
         if (cuentaSesion != null) {
