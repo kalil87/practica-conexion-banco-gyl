@@ -24,6 +24,10 @@ public class CUI {
         this.sr = new SucursalReader(sucursalList);
     }
 
+    public UserLogin getActiveUser(){
+        return activeUser;
+    }
+
     public void setActiveUser(UserLogin user){
         this.activeUser = user;
         setSucursal(this.activeUser.getSucursal());
@@ -37,6 +41,10 @@ public class CUI {
 
     public void printLogo(){
         System.out.println(sucursal.getLogo());
+    }
+
+    public void printSaldo(){
+        System.out.println("Tu saldo actual es de: $" + activeUser.getCuenta().getSaldo());
     }
 
     private void printOptionList(String[] options){
@@ -75,10 +83,10 @@ public class CUI {
     private Cliente scanValidateCliente(){
         Cliente resultado;
         System.out.println("Introduzca usuario del cliente: ");
-        resultado = dr.source.buscarUsername(scanValidate());
+        resultado = sr.getClienteFromAny(scanValidate());
         while (resultado == null){
             System.out.println("Usuario no encontrado, intente de nuevo");
-            resultado = dr.source.buscarUsername(scanValidate());
+            resultado = sr.getClienteFromAny(scanValidate());
         }
         return resultado;
     }
@@ -163,7 +171,6 @@ public class CUI {
             printDataList(ar.makeListString(ar.getAllTransferenciasOfCliente(activeUser.getCuenta())));
             int selection;
             do {
-                printOptionList(optionsMenu);
                 switch (selection = scanOptionList(optionsMenu)) {
                     case 0 -> {
                         receptor = scanValidateCliente();
@@ -178,6 +185,12 @@ public class CUI {
                             new Transferencia.Builder(activeUser.getCuenta(), receptor, monto)
                                     .fecha(LocalDateTime.now().toString())
                                     .acreditar(ar.source);
+                            if (dr.source.buscarUsername(receptor.getUsername()) == null){
+                                Sucursal sucursalExterna = sr.hasCliente(receptor.getUsername());
+                                new Transferencia.Builder(activeUser.getCuenta(), receptor, monto)
+                                        .fecha(LocalDateTime.now().toString())
+                                        .acreditar(sucursalExterna.auditor);
+                            }
                             System.out.println("Transferencia acreditada exitosamente");
                             selection = 3;
                         } else {
@@ -203,7 +216,6 @@ public class CUI {
         printDataList(ar.makeListString(ar.getAllTransferenciasOfCliente(activeUser.getCuenta())));
         int selection;
         do {
-            printOptionList(optionsMenu);
             switch (selection = scanOptionList(optionsMenu)) {
                 case 0,1 -> {
                     optionsValues[selection] = scanValidateCliente();
@@ -218,6 +230,18 @@ public class CUI {
                         new Transferencia.Builder(optionsValues[0],optionsValues[1], monto)
                                 .fecha(LocalDateTime.now().toString())
                                 .acreditar(ar.source);
+                        if (dr.source.buscarUsername(optionsValues[0].getUsername()) == null){
+                            Sucursal sucursalExterna = sr.hasCliente(optionsValues[0].getUsername());
+                            new Transferencia.Builder(optionsValues[0], optionsValues[1], monto)
+                                    .fecha(LocalDateTime.now().toString())
+                                    .acreditar(sucursalExterna.auditor);
+                        }
+                        if (dr.source.buscarUsername(optionsValues[1].getUsername()) == null){
+                            Sucursal sucursalExterna = sr.hasCliente(optionsValues[1].getUsername());
+                            new Transferencia.Builder(optionsValues[0], optionsValues[1], monto)
+                                    .fecha(LocalDateTime.now().toString())
+                                    .acreditar(sucursalExterna.auditor);
+                        }
                         System.out.println("Transferencia creada y acreditada exitosamente");
                         selection = 4;
                     } else {
@@ -268,31 +292,35 @@ public class CUI {
     }
 
     public boolean adminMenu(){
-        String[] optionsMenu = {"Sucursales","Clientes", "Transferencias", "Añadir Nuevo Cliente", "Balance Total", "Cambiar cuenta", "Salir"};
+        String[] optionsMenu = {"Depósito", "Retiro","Sucursales","Clientes", "Transferencias", "Añadir Nuevo Cliente", "Balance Total", "Cambiar cuenta", "Salir"};
 
         printLogo();
+        printSaldo();
         switch(scanOptionList(optionsMenu)){
-            case 0 -> sucursalMenu();
-            case 1 -> clientMenu();
-            case 2 -> transferMenu();
-            case 3 -> newClientMenu();
-            case 4 -> balMenu();
-            case 5 -> {return true;}
+            case 0 -> depositMenu();
+            case 1 -> withdrawMenu();
+            case 2 -> sucursalMenu();
+            case 3 -> clientMenu();
+            case 4 -> transferMenu();
+            case 5 -> newClientMenu();
+            case 6 -> balMenu();
+            case 7 -> this.activeUser = null;
         }
         return false;
     }
 
     public boolean mainMenu(){
         if (activeUser.isAdmin()) {return adminMenu();}
-        String[] optionsMenu = {"Depósito","Retiro", "Transferencias","Sucursales", "Cambiar cuenta", "Salir"};
+        String[] optionsMenu = {"Depósito","Retiro", "Transferencias","Sucursales","Cambiar Cuenta", "Salir"};
 
         printLogo();
+        printSaldo();
         switch(scanOptionList(optionsMenu)){
             case 0 -> depositMenu();
             case 1 -> withdrawMenu();
             case 2 -> transferMenu();
             case 3 -> sucursalMenu();
-            case 4 -> {return true;}
+            case 4 -> this.activeUser = null;
         }
         return false;
     }

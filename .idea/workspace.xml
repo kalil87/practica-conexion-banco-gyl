@@ -4,15 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" name="Changes" comment="FEATURE/ 17 - 04 /&#10;Se crea clase leo.App para evitar repetir código del main">
+    <list default="true" id="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" name="Changes" comment="FIX/ 18 - 04 /&#10;Arreglos de menús">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/AuditReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/AuditReader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/CUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/CUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integracion/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/target/classes/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integracion/target/classes/dominio/leo/AdaptadorABancoLeo$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/target/classes/dominio/leo/AdaptadorABancoLeo$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integracion/target/classes/dominio/leo/AdaptadorABancoLeo.class" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/target/classes/dominio/leo/AdaptadorABancoLeo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integracion/target/classes/dominio/santiago/AdaptadorABancoSantiago$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/target/classes/dominio/santiago/AdaptadorABancoSantiago$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integracion/target/classes/dominio/santiago/AdaptadorABancoSantiago.class" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/target/classes/dominio/santiago/AdaptadorABancoSantiago.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/SucursalReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/SucursalReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/UserLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/UserLogin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/ModeloBanco/Transferencia/Transferencia.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/ModeloBanco/Transferencia/Transferencia.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integracion/src/main/java/dominio/santi/AdaptadorABancoSantiago.java" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/src/main/java/dominio/santi/AdaptadorABancoSantiago.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integracion/target/classes/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/integracion/target/classes/dominio/MediadorBancos.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/integracion/target/classes/dominio/leo/AdaptadorABancoLeo$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/integracion/target/classes/dominio/leo/AdaptadorABancoLeo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/integracion/target/classes/dominio/santiago/AdaptadorABancoSantiago$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/integracion/target/classes/dominio/santiago/AdaptadorABancoSantiago.class" beforeDir="false" />
     </list>
     <list id="007dc272-28f4-4851-8ac7-feb95cbc242a" name="Changes by strillo" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -64,6 +70,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Main (1).executor": "Run",
+    "Application.Main Integracion.executor": "Run",
     "Application.Main.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -71,7 +78,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "devLeno",
+    "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -90,8 +97,8 @@
       <recent name="dominio" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.Main Integracion">
+    <configuration name="Main Integracion" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="integracion" />
       <method v="2">
@@ -105,10 +112,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.Main Integracion" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main Integracion" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.Main (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -187,6 +198,48 @@
     <MESSAGE value="FEATURE/ 17 - 04 /&#10;Se implementa main de implementación, que carga ambos Bancos en una aplicación" />
     <MESSAGE value="FEATURE/ 17 - 04 /&#10;Se crea clase leo.App para evitar repetir código del main" />
     <option name="LAST_COMMIT_MESSAGE" value="FEATURE/ 17 - 04 /&#10;Se crea clase leo.App para evitar repetir código del main" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/AuditReader.java</url>
+          <line>45</line>
+          <properties class="leo.AppCUI.AuditReader" method="makeListString">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/AuditReader.java</url>
+          <line>37</line>
+          <properties class="leo.AppCUI.AuditReader" method="getAllTransferenciasOfCliente">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/CUI.java</url>
+          <line>324</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/CUI.java</url>
+          <line>306</line>
+          <properties>
+            <option name="lambda-ordinal" value="-1" />
+          </properties>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/CUI.java</url>
+          <line>308</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

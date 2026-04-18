@@ -1,5 +1,6 @@
 package leo.AppCUI;
 
+import leo.ModeloBanco.Cliente.Cliente;
 import leo.ModeloBanco.Sucursal;
 
 import java.util.ArrayList;
@@ -52,4 +53,26 @@ public class SucursalReader {
     public int getListSize(){
         return source.size();
     }
-}
+
+    public Cliente getClienteFromAny(String username) {
+        for (Sucursal iSucursal : source) {
+            Cliente iCliente = iSucursal.registro.buscarUsername(username);
+            if (iCliente != null) {
+                return iCliente;
+            }
+
+        }
+        return null;
+    }
+
+    public Sucursal hasCliente(String username){
+        for (Sucursal iSucursal : source) {
+            Cliente iCliente = iSucursal.registro.buscarUsername(username);
+            if (iCliente != null) {
+                return iSucursal;
+            }
+
+        }
+        return null;
+    }
+    }

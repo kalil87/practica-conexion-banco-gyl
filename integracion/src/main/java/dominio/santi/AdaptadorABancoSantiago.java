@@ -2,14 +2,18 @@ package dominio.santi;
 
 import leo.ModeloBanco.Cliente.Cliente;
 import leo.ModeloBanco.Transferencia.Transferencia;
-import santi.modelo.*;
+import santi.modelo.Cuenta;
+import santi.modelo.Sucursal;
+import santi.modelo.TipoCuenta;
+import santi.modelo.TipoTransaccion;
+import santi.modelo.Transaccion;
 import santi.servicio.OperacionesBancarias;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class AdaptadorABancoSantiago {
-    public ArrayList<Sucursal> adaptarSucursalesDeLeo(ArrayList<leo.ModeloBanco.Sucursal> bancoLeo) {
+    public ArrayList<santi.modelo.Sucursal> adaptarSucursalesDeLeo(ArrayList<leo.ModeloBanco.Sucursal> bancoLeo) {
         ArrayList<santi.modelo.Sucursal> listaWrapper = new ArrayList<>();
 
         for (leo.ModeloBanco.Sucursal indexSucursal : bancoLeo) {

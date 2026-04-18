@@ -40,7 +40,7 @@ public class AuditReader {
         source.getAuditoria().forEach(t -> {
             if (t.getEmisor() == cliente || t.getReceptor() == cliente) {transferenciasOfCliente.add(t);}
         });
-        return null;
+        return transferenciasOfCliente;
     }
 
     public ArrayList<String> makeListString(ArrayList<Transferencia> audit){

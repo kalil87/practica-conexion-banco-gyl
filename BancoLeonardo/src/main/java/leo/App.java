@@ -14,7 +14,10 @@ public final class App {
             objCUI.setActiveUser(objUserLogin);
             objCUI.setSucursalList(dataBase.getSucursalList());
 
-            leoIsRunning = objCUI.mainMenu();
+            objCUI.mainMenu();
+            if (objCUI.getActiveUser() != null) {
+                leoIsRunning=false;
+            }
         }
     }
 }

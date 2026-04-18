@@ -26,6 +26,7 @@ public class UserLogin {
     public UserLogin(DataBaseInjector database){
         validateLogInDB(database,scannerLogIn());
         this.admin = validateAdminPerms(cuenta);
+
     }
 
     public String getUser(){
@@ -77,6 +78,8 @@ public class UserLogin {
                     System.out.println("Bienvenido " + iCliente.getNombreCompleto());
                     this.sucursal = iSucursal;
                     this.cuenta = iCliente;
+                    this.user = this.cuenta.getUsername();
+                    this.pass = this.cuenta.getPassword();
                     return true;
                 }
                 break; //Si existe usuario pero la contraseña está mal, entonces dejo de buscar
