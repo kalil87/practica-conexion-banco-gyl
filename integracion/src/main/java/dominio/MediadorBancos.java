@@ -1,7 +1,7 @@
 package dominio;
 
 import dominio.leo.AdaptadorABancoLeo;
-import dominio.santiago.AdaptadorABancoSantiago;
+import dominio.santi.AdaptadorABancoSantiago;
 
 public class MediadorBancos {
     private final AdaptadorABancoLeo adapterLeo = new AdaptadorABancoLeo();

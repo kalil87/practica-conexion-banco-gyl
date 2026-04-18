@@ -1,19 +1,19 @@
-package dominio.santiago;
+package dominio.santi;
 
 import leo.ModeloBanco.Cliente.Cliente;
 import leo.ModeloBanco.Transferencia.Transferencia;
-import santiago.modelo.*;
-import santiago.servicio.OperacionesBancarias;
+import santi.modelo.*;
+import santi.servicio.OperacionesBancarias;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class AdaptadorABancoSantiago {
     public ArrayList<Sucursal> adaptarSucursalesDeLeo(ArrayList<leo.ModeloBanco.Sucursal> bancoLeo) {
-        ArrayList<santiago.modelo.Sucursal> listaWrapper = new ArrayList<>();
+        ArrayList<santi.modelo.Sucursal> listaWrapper = new ArrayList<>();
 
         for (leo.ModeloBanco.Sucursal indexSucursal : bancoLeo) {
-            santiago.modelo.Sucursal wrapperSucursal = new Sucursal("[Banco Leo] " + indexSucursal.getNombre());
+            santi.modelo.Sucursal wrapperSucursal = new Sucursal("[Banco Leo] " + indexSucursal.getNombre());
 
             for (Cliente indexCliente : indexSucursal.registro.getClientelaMap().values()){
 
@@ -34,7 +34,7 @@ public class AdaptadorABancoSantiago {
         return listaWrapper;
     }
 
-    public Cuenta adaptarClienteDeLeo(santiago.modelo.Sucursal sucursalDestino, Cliente clienteLeo) {
+    public Cuenta adaptarClienteDeLeo(santi.modelo.Sucursal sucursalDestino, Cliente clienteLeo) {
         Cuenta wrapperCliente = sucursalDestino.crearCuenta(clienteLeo.getNombre(),
                 clienteLeo.getUsername() + "@bancoleo.com",
                 4040,

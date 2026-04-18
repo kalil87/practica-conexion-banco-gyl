@@ -1,8 +1,8 @@
-package santiago;
+package santi;
 
-import santiago.modelo.Banco;
-import santiago.servicio.InicializadorBanco;
-import santiago.ui.Menu;
+import santi.modelo.Banco;
+import santi.servicio.InicializadorBanco;
+import santi.ui.Menu;
 
 public class Main {
     static void main(String[] args) {

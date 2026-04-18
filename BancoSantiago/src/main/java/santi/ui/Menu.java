@@ -1,7 +1,7 @@
-package santiago.ui;
+package santi.ui;
 
-import santiago.modelo.*;
-import santiago.servicio.OperacionesBancarias;
+import santi.modelo.*;
+import santi.servicio.OperacionesBancarias;
 
 import java.util.Scanner;
 
@@ -263,6 +263,7 @@ public class Menu {
 
         System.out.println("\nIngrese el monto que desea transferir desde su cuenta\n");
         double montoTransferido = teclado.nextDouble();
+        teclado.nextLine();
 
         System.out.println("\nIngrese el email de la persona a la que transferirá el dinero\n");
         String emailTransferido = teclado.nextLine();
@@ -274,6 +275,20 @@ public class Menu {
             resultado = true;
         }
         return resultado;
+    }
+
+    private double calcularBalanceBanco() {
+        double balanceTotal = 0;
+
+        for (Sucursal sucursalIterada : banco.getSucursales()) {
+            for (Cuenta cuentaIterada : sucursalIterada.getCuentas()) {
+                if (cuentaIterada.getTipoCuenta() != TipoCuenta.BANCO_EXTERNO) {
+                    balanceTotal += cuentaIterada.getSaldo();
+                }
+            }
+        }
+
+        return balanceTotal;
     }
 
     private boolean iniciarSesion() {
@@ -307,7 +322,7 @@ public class Menu {
         String emailCuentaBuscada = teclado.nextLine();
 
         Cuenta cuentaBuscada = banco.buscarCuentaBanco(emailCuentaBuscada);
-        if (cuentaBuscada == null) {
+        if (cuentaBuscada == null || cuentaBuscada.getTipoCuenta() == TipoCuenta.BANCO_EXTERNO) {
             System.out.println("\nNo se encontró una cuenta con el email ingresado\n");
         } else {
             System.out.println(cuentaBuscada);
@@ -321,30 +336,45 @@ public class Menu {
 
         Sucursal sucursalBuscada = banco.buscarSucursal(nombreSucursalBuscada);
 
-        if (sucursalBuscada == null) {
+        if (sucursalBuscada == null || sucursalBuscada.getNombre().contains("[Banco Leo]")) {
             System.out.println("\nNo se encontró una sucursal con el nombre ingresado\n");
         } else {
+            System.out.println("-----Datos de las cuentas de la sucursal " + sucursalBuscada.getNombre() + "-----");
             for (Cuenta cuenta : sucursalBuscada.getCuentas()) {
-                System.out.println(cuenta);
+                if (cuenta.getTipoCuenta() != TipoCuenta.BANCO_EXTERNO) {
+                    System.out.println(cuenta);
+                }
             }
+            System.out.println("\n");
         }
     }
 
     private void mostrarDatosBanco() {
         System.out.println("-----Detalles de las cuentas del banco-----");
 
-        for (Sucursal sucursal : banco.getSucursales()) {
-            System.out.println("-----Sucursal " + sucursal.getNombre() + "-----");
+        for (Sucursal sucursalIterada : banco.getSucursales()) {
+            String nombreSucursalIterada = sucursalIterada.getNombre();
 
-            for (Cuenta cuenta : sucursal.getCuentas()) {
-                System.out.println(cuenta);
+            if (!nombreSucursalIterada.contains("[Banco Leo]")) {
+                System.out.println("-----Sucursal " + nombreSucursalIterada + "-----");
+
+                for (Cuenta cuentaIterada : sucursalIterada.getCuentas()) {
+                    System.out.println(cuentaIterada);
+                }
             }
         }
+
+        double balanceTotal = calcularBalanceBanco();
+        System.out.println("El balance total del banco es de $" + balanceTotal + "\n");
     }
 
     private void mostrarSucursales() {
-        for (int i = 0; i < banco.getSucursales().size(); i++) {
-            System.out.println(i + 1 + ") " + banco.getSucursales().get(i).getNombre());
+        int i = 1;
+        for (Sucursal sucursalIterada : banco.getSucursales()) {
+            if (!sucursalIterada.getNombre().contains("[Banco Leo]")) {
+                System.out.println(i + ") " + sucursalIterada.getNombre());
+                i++;
+            }
         }
     }
 

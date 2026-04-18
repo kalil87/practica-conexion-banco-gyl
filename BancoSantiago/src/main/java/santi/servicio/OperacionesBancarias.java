@@ -1,8 +1,8 @@
-package santiago.servicio;
+package santi.servicio;
 
-import santiago.modelo.Cuenta;
-import santiago.modelo.TipoTransaccion;
-import santiago.modelo.Transaccion;
+import santi.modelo.Cuenta;
+import santi.modelo.TipoTransaccion;
+import santi.modelo.Transaccion;
 
 public class OperacionesBancarias {
     public static void depositar(Cuenta cuenta, double monto) {

@@ -6,19 +6,28 @@
   <component name="ChangeListManager">
     <list default="true" id="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" name="Changes" comment="FEATURE/ 17 - 04 /&#10;Se implementa main de implementación, que carga ambos Bancos en una aplicación">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/CUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/CUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BancoSantiago/src/main/java/santiago/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoSantiago/src/main/java/santi/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BancoSantiago/src/main/java/santiago/modelo/Banco.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoSantiago/src/main/java/santi/modelo/Banco.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BancoSantiago/src/main/java/santiago/modelo/Cuenta.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoSantiago/src/main/java/santi/modelo/Cuenta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BancoSantiago/src/main/java/santiago/modelo/Estado.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoSantiago/src/main/java/santi/modelo/Estado.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BancoSantiago/src/main/java/santiago/modelo/Sucursal.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoSantiago/src/main/java/santi/modelo/Sucursal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BancoSantiago/src/main/java/santiago/modelo/TipoCuenta.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoSantiago/src/main/java/santi/modelo/TipoCuenta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BancoSantiago/src/main/java/santiago/modelo/TipoTransaccion.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoSantiago/src/main/java/santi/modelo/TipoTransaccion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BancoSantiago/src/main/java/santiago/modelo/Transaccion.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoSantiago/src/main/java/santi/modelo/Transaccion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BancoSantiago/src/main/java/santiago/servicio/InicializadorBanco.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoSantiago/src/main/java/santi/servicio/InicializadorBanco.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BancoSantiago/src/main/java/santiago/servicio/OperacionesBancarias.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoSantiago/src/main/java/santi/servicio/OperacionesBancarias.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BancoSantiago/src/main/java/santiago/ui/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoSantiago/src/main/java/santi/ui/Menu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integracion/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integracion/src/main/java/dominio/MediadorBancos.java" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/src/main/java/dominio/MediadorBancos.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integracion/src/main/java/dominio/leo/AdaptadorABancoLeo.java" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/src/main/java/dominio/leo/AdaptadorABancoLeo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integracion/src/main/java/dominio/santiago/AdaptadorABancoSantiago.java" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/src/main/java/dominio/santi/AdaptadorABancoSantiago.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integracion/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/target/classes/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integracion/target/classes/dominio/leo/AdaptadorABancoLeo$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/target/classes/dominio/leo/AdaptadorABancoLeo$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integracion/target/classes/dominio/leo/AdaptadorABancoLeo.class" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/target/classes/dominio/leo/AdaptadorABancoLeo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integracion/target/classes/dominio/santiago/AdaptadorABancoSantiago.class" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/target/classes/dominio/santiago/AdaptadorABancoSantiago.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integracion/target/classes/dominio/santiago/AdaptadorABancoSantiago$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/integracion/target/classes/dominio/santiago/AdaptadorABancoSantiago.class" beforeDir="false" />
     </list>
-    <list id="007dc272-28f4-4851-8ac7-feb95cbc242a" name="Changes by strillo" comment="">
-      <change beforePath="$PROJECT_DIR$/BancoSantiago/src/main/java/santiago/modelo/Cuenta.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoSantiago/src/main/java/santiago/modelo/Cuenta.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integracion/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integracion/src/main/java/dominio/santiago/AdaptadorABancoSantiago.java" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/src/main/java/dominio/santiago/AdaptadorABancoSantiago.java" afterDir="false" />
-    </list>
+    <list id="007dc272-28f4-4851-8ac7-feb95cbc242a" name="Changes by strillo" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -53,22 +62,6 @@
     &quot;accountId&quot;: &quot;4101cab1-70b3-4aa4-9a67-6427daf52bc0&quot;
   }
 }</component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/integracion/src/main/java/Main.java">
-      <ranges>
-        <range start1="14" end1="14" start2="14" end2="15" changelist="007dc272-28f4-4851-8ac7-feb95cbc242a" />
-        <range start1="16" end1="16" start2="17" end2="33" changelist="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" />
-        <range start1="17" end1="19" start2="34" end2="52" changelist="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" />
-        <range start1="21" end1="22" start2="54" end2="55" changelist="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" />
-        <range start1="23" end1="28" start2="56" end2="59" changelist="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" />
-        <range start1="29" end1="35" start2="60" end2="65" changelist="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" />
-        <range start1="36" end1="40" start2="66" end2="71" changelist="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" />
-        <range start1="42" end1="47" start2="73" end2="75" changelist="007dc272-28f4-4851-8ac7-feb95cbc242a" />
-        <range start1="48" end1="52" start2="76" end2="76" changelist="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" />
-        <range start1="53" end1="68" start2="77" end2="81" changelist="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" />
-      </ranges>
-    </file>
-  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 7
@@ -81,29 +74,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main (1).executor": "Run",
-    "Application.Main.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.com.intellij.cwm.plugin.common.options.CodeWithMeColorsPage"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main (1).executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.com.intellij.cwm.plugin.common.options.CodeWithMeColorsPage&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="leo.AppCUI" />
@@ -111,23 +104,15 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="integracion" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="leo.Main" />
-      <module name="BankTallerPOOGyL" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -198,17 +183,6 @@
     <MESSAGE value="Feature/17-04/&#10;Se concluyen adaptadores.&#10;Se empieza a trabajar en Mediador e integraciones a cada Banco" />
     <MESSAGE value="FEATURE/ 17 - 04 /&#10;Se implementa main de implementación, que carga ambos Bancos en una aplicación" />
     <option name="LAST_COMMIT_MESSAGE" value="FEATURE/ 17 - 04 /&#10;Se implementa main de implementación, que carga ambos Bancos en una aplicación" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/integracion/src/main/java/dominio/leo/AdaptadorABancoLeo.java</url>
-          <line>18</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

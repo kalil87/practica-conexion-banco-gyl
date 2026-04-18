@@ -1,4 +1,4 @@
-package santiago.modelo;
+package santi.modelo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,9 +58,12 @@ public class Cuenta {
 
     @Override
     public String toString() {
-        return "Nombre: " + nombre + '\n' + "|" + "Email: " + email + '\n' + "|" + "Pin: " + pin + '\n' + "|" + "Saldo: $" + saldo + '\n' +
-                "Sucursal: " + sucursal.getNombre() + '\n' +
-                "Tipo de cuenta: " + tipoCuenta + '\n';
+        return "Nombre: " + nombre
+                + " | Email: " + email
+                + " | Pin: " + pin
+                + " | Saldo: $" + saldo
+                + " | Sucursal: " + sucursal.getNombre()
+                + " | Tipo de cuenta: " + tipoCuenta;
     }
 
     public String getNombre() {
@@ -81,10 +84,6 @@ public class Cuenta {
 
     public boolean isAdmin() {
         return admin;
-    }
-
-    public Sucursal getSucursal() {
-        return sucursal;
     }
 
     public TipoCuenta getTipoCuenta() {
