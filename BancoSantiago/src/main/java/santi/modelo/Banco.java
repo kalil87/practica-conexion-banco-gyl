@@ -1,4 +1,4 @@
-package santiago.modelo;
+package santi.modelo;
 
 import java.util.ArrayList;
 import java.util.List;

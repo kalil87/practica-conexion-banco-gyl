@@ -2,10 +2,10 @@ package dominio.leo;
 
 import leo.ModeloBanco.Cliente.Cliente;
 import leo.ModeloBanco.Transferencia.Transferencia;
-import santiago.modelo.Cuenta;
-import santiago.modelo.Sucursal;
-import santiago.modelo.TipoTransaccion;
-import santiago.modelo.Transaccion;
+import santi.modelo.Cuenta;
+import santi.modelo.Sucursal;
+import santi.modelo.TipoTransaccion;
+import santi.modelo.Transaccion;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ public class AdaptadorABancoLeo {
     public ArrayList<leo.ModeloBanco.Sucursal> adaptarSucursalesDeSanti(List<Sucursal> sucursalesSanti) {
         ArrayList<leo.ModeloBanco.Sucursal> sucursalesTraducidas = new ArrayList<>();
 
-        for (santiago.modelo.Sucursal sucursalIterada : sucursalesSanti) {
+        for (santi.modelo.Sucursal sucursalIterada : sucursalesSanti) {
             if (!sucursalIterada.getNombre().contains("[Banco Leo] ")) {
                 leo.ModeloBanco.Sucursal sucursalTraducida = new leo.ModeloBanco.Sucursal("[Banco Santi] " + sucursalIterada.getNombre(), sucursalIterada.getNombre(), "Dato desconocido",
                         """

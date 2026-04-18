@@ -1,33 +1,60 @@
-import dominio.MediadorBancos;
-import leo.ServicioDataBase.DataBaseInjector;
-import santiago.modelo.Banco;
-import santiago.modelo.Cuenta;
-import santiago.modelo.Sucursal;
-import santiago.servicio.InicializadorBanco;
-import santiago.ui.Menu;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+import dominio.MediadorBancos;
+import leo.ServicioDataBase.DataBaseInjector;
+import santi.modelo.Banco;
+import santi.modelo.Cuenta;
+import santi.modelo.Sucursal;
+import santi.servicio.InicializadorBanco;
+import santi.ui.Menu;
 
 public class Main {
+    private static final Scanner TECLADO = new Scanner(System.in);
+    private static final MediadorBancos MEDIADOR = new MediadorBancos();
+    private static final DataBaseInjector BANCO_LEO = new DataBaseInjector();
+    private static final Banco BANCO_SANTI = Banco.getInstancia();
+
     public static void main(String[] args) {
         boolean isRunning = true;
-        Scanner teclado = new Scanner(System.in);
-        MediadorBancos mediador = new MediadorBancos();
 
-        DataBaseInjector bancoLeo = new DataBaseInjector();
-        Banco bancoSanti = Banco.getInstancia();
+       procesarIntegracion();
 
-        InicializadorBanco.inicializarBanco(bancoSanti);
-        ArrayList<santiago.modelo.Sucursal> sucursalesAdaptadas = mediador.getAdapterSantiago().adaptarSucursalesDeLeo(bancoLeo.getSucursalList());
-        for (santiago.modelo.Sucursal sucursalIterada : sucursalesAdaptadas) {
-            bancoSanti.crearSucursal(sucursalIterada.getNombre());
+        while (isRunning) {
+            System.out.println("""
+                ¿A qué banco le gustaría ingresar? Ingrese 0 para salir
+                1) Banco Leonardo
+                2) Banco Santiago""");
+            int opcion = TECLADO.nextInt();
 
-            if (bancoSanti.buscarSucursal(sucursalIterada.getNombre()) == null) {
-                bancoSanti.crearSucursal(sucursalIterada.getNombre());
+            switch (opcion) {
+                case 1 -> {new leo.App(BANCO_LEO);}
+                case 2 -> {new Menu(BANCO_SANTI).mostrarMenuBanco();}
+                case 0 -> isRunning = false;
+                default -> System.out.println("\nOpción inválida\n");
+            }
+        }
+    }
+
+    private static void procesarIntegracion() {
+        /*Inicialización del banco de Santi*/
+        InicializadorBanco.inicializarBanco(BANCO_SANTI);
+        /*Se adaptan las sucursales del banco de Leo*/
+        ArrayList<santi.modelo.Sucursal> sucursalesAdaptadas = MEDIADOR.getAdapterSantiago().adaptarSucursalesDeLeo(BANCO_LEO.getSucursalList());
+        /*Se agregan las sucursales adaptadas al banco de Santi*/
+        agregarSucursalesAdaptadas(sucursalesAdaptadas);
+        /*Se adaptan las sucursales del banco de Santi y se agregan al de Leo*/
+        BANCO_LEO.getSucursalList().addAll(MEDIADOR.getAdapterLeo().adaptarSucursalesDeSanti(BANCO_SANTI.getSucursales()));
+    }
+
+    private static void agregarSucursalesAdaptadas (ArrayList<santi.modelo.Sucursal> sucursalesAdaptadas) {
+        for (santi.modelo.Sucursal sucursalIterada : sucursalesAdaptadas) {
+            BANCO_SANTI.crearSucursal(sucursalIterada.getNombre());
+
+            if (BANCO_SANTI.buscarSucursal(sucursalIterada.getNombre()) == null) {
+                BANCO_SANTI.crearSucursal(sucursalIterada.getNombre());
             }
 
-            Sucursal sucursalEspejo = bancoSanti.buscarSucursal(sucursalIterada.getNombre());
+            Sucursal sucursalEspejo = BANCO_SANTI.buscarSucursal(sucursalIterada.getNombre());
 
             for (Cuenta cuentaIterada : sucursalIterada.getCuentas()) {
                 if (sucursalEspejo.buscarCuentaSucursal(cuentaIterada.getEmail()) == null) {
@@ -37,23 +64,6 @@ public class Main {
                         cuentaEspejo.agregarSaldo(cuentaIterada.getSaldo());
                     }
                 }
-            }
-        }
-
-        bancoLeo.getSucursalList().addAll(mediador.getAdapterLeo().adaptarSucursalesDeSanti(bancoSanti.getSucursales()));
-
-        while (isRunning) {
-            System.out.println("""
-                ¿A qué banco le gustaría ingresar? Ingrese 0 para salir
-                1) Banco Leonardo
-                2) Banco Santiago""");
-            int opcion = teclado.nextInt();
-
-            switch (opcion) {
-                case 1 -> {new leo.App(bancoLeo);}
-                case 2 -> {new Menu(bancoSanti).mostrarMenuBanco();}
-                case 0 -> isRunning = false;
-                default -> System.out.println("\nOpción inválida\n");
             }
         }
     }

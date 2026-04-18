@@ -1,8 +1,8 @@
-package santiago.servicio;
+package santi.servicio;
 
-import santiago.modelo.Banco;
-import santiago.modelo.Sucursal;
-import santiago.modelo.TipoCuenta;
+import santi.modelo.Banco;
+import santi.modelo.Sucursal;
+import santi.modelo.TipoCuenta;
 
 public class InicializadorBanco {
     public static void inicializarBanco(Banco banco) {
