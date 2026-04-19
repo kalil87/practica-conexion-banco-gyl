@@ -213,7 +213,7 @@ public class CUI {
             optionsMenu[i] = optionsLabel[i];
         }
 
-        printDataList(ar.makeListString(ar.getAllTransferenciasOfCliente(activeUser.getCuenta())));
+        printDataList(ar.getAuditToListString());
         int selection;
         do {
             switch (selection = scanOptionList(optionsMenu)) {

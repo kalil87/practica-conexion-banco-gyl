@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" name="Changes" comment="FEATURE / 19 - 04 /&#10;Se crea Clase DataBase, que tiene subclase DataBaseInjector. Todas las instancias esperan una clase DataBase para mayor legibilidad">
-      <change beforePath="$PROJECT_DIR$/integracion/src/main/java/dominio/MediadorBancos.java" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/src/main/java/dominio/MediadorBancos.java" afterDir="false" />
+    <list default="true" id="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" name="Changes" comment="HOTFIX / 19 - 04 /&#10;Renombrar variables en AdaptadorABancoLeo para legibilidad">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/CUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/CUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integracion/src/main/java/dominio/leo/AdaptadorABancoLeo.java" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/src/main/java/dominio/leo/AdaptadorABancoLeo.java" afterDir="false" />
     </list>
     <list id="007dc272-28f4-4851-8ac7-feb95cbc242a" name="Changes by strillo" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,6 +44,9 @@
     &quot;accountId&quot;: &quot;4101cab1-70b3-4aa4-9a67-6427daf52bc0&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 7
@@ -57,7 +62,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Main (1).executor": "Run",
-    "Application.Main Integracion.executor": "Run",
+    "Application.Main Integracion.executor": "Debug",
     "Application.Main.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -65,7 +70,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "Merging devLeno",
+    "git-widget-placeholder": "codex/fix-transfer-visibility-issue",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -169,7 +174,23 @@
       <option name="project" value="LOCAL" />
       <updated>1776632350000</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="FEATURE / 19 - 04 /&#10;Se crea Clase DataBase, que tiene subclase DataBaseInjector. Todas las instancias esperan una clase DataBase para mayor legibilidad">
+      <option name="closed" value="true" />
+      <created>1776634173276</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1776634173276</updated>
+    </task>
+    <task id="LOCAL-00008" summary="HOTFIX / 19 - 04 /&#10;Renombrar variables en AdaptadorABancoLeo para legibilidad">
+      <option name="closed" value="true" />
+      <created>1776639119927</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1776639119927</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -205,46 +226,25 @@
     <MESSAGE value="FEATURE/ 17 - 04 /&#10;Se crea clase leo.App para evitar repetir código del main" />
     <MESSAGE value="FIX/ 18 - 04 /&#10;Finalizo implementaciones en menues" />
     <MESSAGE value="FEATURE / 19 - 04 /&#10;Se crea Clase DataBase, que tiene subclase DataBaseInjector. Todas las instancias esperan una clase DataBase para mayor legibilidad" />
-    <option name="LAST_COMMIT_MESSAGE" value="FEATURE / 19 - 04 /&#10;Se crea Clase DataBase, que tiene subclase DataBaseInjector. Todas las instancias esperan una clase DataBase para mayor legibilidad" />
+    <MESSAGE value="HOTFIX / 19 - 04 /&#10;Renombrar variables en AdaptadorABancoLeo para legibilidad" />
+    <option name="LAST_COMMIT_MESSAGE" value="HOTFIX / 19 - 04 /&#10;Renombrar variables en AdaptadorABancoLeo para legibilidad" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="29" />
+        </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/CUI.java</url>
+          <line>215</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/AuditReader.java</url>
-          <line>45</line>
-          <properties class="leo.AppCUI.AuditReader" method="makeListString">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/AuditReader.java</url>
-          <line>37</line>
-          <properties class="leo.AppCUI.AuditReader" method="getAllTransferenciasOfCliente">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/CUI.java</url>
-          <line>324</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/CUI.java</url>
-          <line>306</line>
-          <properties>
-            <option name="lambda-ordinal" value="-1" />
-          </properties>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/CUI.java</url>
-          <line>308</line>
-          <option name="timeStamp" value="19" />
+          <line>38</line>
+          <option name="timeStamp" value="31" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
