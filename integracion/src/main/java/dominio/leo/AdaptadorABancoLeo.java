@@ -72,13 +72,12 @@ public class AdaptadorABancoLeo {
         } else if (transaccionATraducir.getTipoTransaccion() == TipoTransaccion.RETIRO) {
             esDepositoTraducido = false;
         }
-
-        Cliente origenTraducido = adaptarCuentaACliente(transaccionATraducir.getOrigen(), sucursalPortadora);
         Cliente destinoTraducido = adaptarCuentaACliente(transaccionATraducir.getDestino(), sucursalPortadora);
 
         if (esDepositoTraducido != null) {
             new Transferencia.Builder(esDepositoTraducido, destinoTraducido, BigDecimal.valueOf(transaccionATraducir.getMonto())).fecha("Dato desconocido").acreditar(sucursalPortadora.auditor);
         } else {
+            Cliente origenTraducido = adaptarCuentaACliente(transaccionATraducir.getOrigen(), sucursalPortadora);
             new Transferencia.Builder(origenTraducido, destinoTraducido, BigDecimal.valueOf(transaccionATraducir.getMonto())).fecha("Dato desconocido").acreditar(sucursalPortadora.auditor);
         }
     }
