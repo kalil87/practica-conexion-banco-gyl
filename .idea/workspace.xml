@@ -4,21 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" name="Changes" comment="FIX/ 18 - 04 /&#10;Arreglos de menús">
+    <list default="true" id="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" name="Changes" comment="FIX/ 18 - 04 /&#10;Finalizo implementaciones en menues">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/AuditReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/AuditReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/CUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/CUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/SucursalReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/SucursalReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/UserLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/UserLogin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/ModeloBanco/Transferencia/Transferencia.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/ModeloBanco/Transferencia/Transferencia.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integracion/src/main/java/dominio/santi/AdaptadorABancoSantiago.java" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/src/main/java/dominio/santi/AdaptadorABancoSantiago.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integracion/target/classes/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/integracion/target/classes/dominio/MediadorBancos.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/integracion/target/classes/dominio/leo/AdaptadorABancoLeo$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/integracion/target/classes/dominio/leo/AdaptadorABancoLeo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/integracion/target/classes/dominio/santiago/AdaptadorABancoSantiago$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/integracion/target/classes/dominio/santiago/AdaptadorABancoSantiago.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/integracion/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/src/main/java/Main.java" afterDir="false" />
     </list>
     <list id="007dc272-28f4-4851-8ac7-feb95cbc242a" name="Changes by strillo" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,7 +26,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="devLeno" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -78,7 +66,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "devLeno",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -163,7 +151,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776468116657</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="FIX/ 18 - 04 /&#10;Finalizo implementaciones en menues">
+      <option name="closed" value="true" />
+      <created>1776553405344</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1776553405344</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -197,7 +193,8 @@
     <MESSAGE value="Feature/17-04/&#10;Se concluyen adaptadores.&#10;Se empieza a trabajar en Mediador e integraciones a cada Banco" />
     <MESSAGE value="FEATURE/ 17 - 04 /&#10;Se implementa main de implementación, que carga ambos Bancos en una aplicación" />
     <MESSAGE value="FEATURE/ 17 - 04 /&#10;Se crea clase leo.App para evitar repetir código del main" />
-    <option name="LAST_COMMIT_MESSAGE" value="FEATURE/ 17 - 04 /&#10;Se crea clase leo.App para evitar repetir código del main" />
+    <MESSAGE value="FIX/ 18 - 04 /&#10;Finalizo implementaciones en menues" />
+    <option name="LAST_COMMIT_MESSAGE" value="FIX/ 18 - 04 /&#10;Finalizo implementaciones en menues" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
