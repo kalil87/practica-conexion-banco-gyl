@@ -5,40 +5,33 @@ import leo.ModeloBanco.Sucursal;
 import leo.ModeloBanco.Transferencia.Transferencia;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
-//Esta clase simula datos persistentes históricos a la fecha de inicializar el proyecto
-//Todas estas inyecciones son hard-codeadas a modo de ejemplo
+/*Esta clase simula datos persistentes históricos a la fecha de inicializar el proyecto
+Todas estas inyecciones son hard-codeadas a modo de ejemplo*/
 
-public class DataBaseInjector {
-    private ArrayList<Sucursal> sucursalList;
+public class DataBaseInjector extends DataBase {
+
     public DataBaseInjector(){
-        sucursalList = new ArrayList<>();
+        this.DataBaseInjector(false);
+    }
+    public DataBaseInjector DataBaseInjector(boolean testMode){
         cargarSucursales();
-        //cargarTests();
-        //cargarDuplicados();
+        if (testMode) {cargarTests();}
+        if (testMode) {cargarDuplicados();}
         cargarClientes(getCentral());
-    }
-
-    public ArrayList<Sucursal> getSucursalList() {
-        return sucursalList;
-    }
-
-    public Sucursal getSucursalList(int index){
-        return sucursalList.get(index);
+        return this;
     }
 
     public Sucursal getCentral(){
-        return sucursalList.get(0);
+        return getSucursalList(0);
     }
 
     private Sucursal cargarCentral(){
         return new Sucursal("Central","Calle Central 5","14-04-1998");
     }
     private void cargarSucursales(){
-        sucursalList.add(cargarCentral());
-        sucursalList.add(new Sucursal("Parque Patricios", "MonteAgudo 255", "16-04-2026"));
+        cargarSucursal(cargarCentral());
+        cargarSucursal(new Sucursal("Parque Patricios", "MonteAgudo 255", "16-04-2026"));
     }
 
     private void cargarDuplicados(){
@@ -91,9 +84,9 @@ public class DataBaseInjector {
                     .permisos("ADMIN")
                     .saldo(BigDecimal.valueOf(8888))
                     .build(iSucursal.registro);
-        }
 
-        sucursalList.addAll(List.of(replica));
+            cargarSucursal(iSucursal);
+        }
     }
 
     private void cargarTests() {
@@ -121,7 +114,7 @@ public class DataBaseInjector {
         new Transferencia.Builder(objSucursalTest.registro.buscarUsername("test"), objSucursalTest.registro.buscarUsername("testuser"), BigDecimal.TEN)
                 .acreditar(objSucursalTest.auditor);
 
-        sucursalList.add(objSucursalTest);
+        getSucursalList().add(objSucursalTest);
     }
 
     private void cargarClientes(Sucursal sucursal) {

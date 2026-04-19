@@ -2,10 +2,10 @@ package leo;
 
 import leo.AppCUI.CUI;
 import leo.AppCUI.UserLogin;
-import leo.ServicioDataBase.DataBaseInjector;
+import leo.ServicioDataBase.DataBase;
 
 public final class App {
-    public App(DataBaseInjector dataBase) {
+    public App(DataBase dataBase) {
         boolean leoIsRunning = true;
 
         CUI objCUI = new CUI();
