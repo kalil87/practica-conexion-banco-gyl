@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import dominio.MediadorBancos;
+import leo.ServicioDataBase.DataBase;
 import leo.ServicioDataBase.DataBaseInjector;
 import santi.modelo.Banco;
 import santi.modelo.Cuenta;
@@ -10,7 +11,7 @@ import santi.ui.Menu;
 
 public class Main {
     private static final Scanner TECLADO = new Scanner(System.in);
-    private static final DataBaseInjector BANCO_LEO = new DataBaseInjector();
+    private static final DataBase BANCO_LEO = new DataBaseInjector();
     private static final Banco BANCO_SANTI = Banco.getInstancia();
     private static final MediadorBancos MEDIADOR = new MediadorBancos(BANCO_LEO, BANCO_SANTI);
 

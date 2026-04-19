@@ -2,7 +2,7 @@ package dominio;
 
 import dominio.leo.AdaptadorABancoLeo;
 import dominio.santi.AdaptadorABancoSantiago;
-import leo.ServicioDataBase.DataBaseInjector;
+import leo.ServicioDataBase.DataBase;
 import santi.modelo.Banco;
 import santi.modelo.Cuenta;
 import santi.modelo.Sucursal;
@@ -15,10 +15,10 @@ public class MediadorBancos {
     private static final AdaptadorABancoSantiago adapterSantiago = new AdaptadorABancoSantiago();
     private static final String PREFIJO_SUCURSAL_LEO_EN_SANTI = "[Banco Leo] ";
     private static final String PREFIJO_SUCURSAL_SANTI_EN_LEO = "[Banco Santi] ";
-    private DataBaseInjector BANCO_LEO;
+    private DataBase BANCO_LEO;
     private Banco BANCO_SANTI;
 
-    public MediadorBancos(DataBaseInjector bancoLeo, Banco bancoSanti){
+    public MediadorBancos(DataBase bancoLeo, Banco bancoSanti){
         this.BANCO_LEO = bancoLeo;
         this.BANCO_SANTI = bancoSanti;
     }
