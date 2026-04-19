@@ -13,11 +13,14 @@ public class Main {
     private static final MediadorBancos MEDIADOR = new MediadorBancos();
     private static final DataBaseInjector BANCO_LEO = new DataBaseInjector();
     private static final Banco BANCO_SANTI = Banco.getInstancia();
+    private static final String PREFIJO_SUCURSAL_LEO_EN_SANTI = "[Banco Leo] ";
+    private static final String PREFIJO_SUCURSAL_SANTI_EN_LEO = "[Banco Santi] ";
 
     public static void main(String[] args) {
         boolean isRunning = true;
 
-       procesarIntegracion();
+        InicializadorBanco.inicializarBanco(BANCO_SANTI);
+        sincronizarBancos();
 
         while (isRunning) {
             try{
@@ -33,8 +36,14 @@ public class Main {
                 int opcion = Integer.parseInt(input);
 
                 switch (opcion) {
-                    case 1 -> new leo.App(BANCO_LEO);
-                    case 2 -> new Menu(BANCO_SANTI).mostrarMenuBanco();
+                    case 1 -> {
+                        sincronizarBancos();
+                        new leo.App(BANCO_LEO);
+                    }
+                    case 2 -> {
+                        sincronizarBancos();
+                        new Menu(BANCO_SANTI).mostrarMenuBanco();
+                    }
                     case 0 -> isRunning = false;
                     default -> System.out.println("\nOpción inválida\n");
                 }
@@ -44,21 +53,22 @@ public class Main {
         }
     }
 
-    private static void procesarIntegracion() {
-        /*Inicialización del banco de Santi*/
-        InicializadorBanco.inicializarBanco(BANCO_SANTI);
-        /*Se adaptan las sucursales del banco de Leo*/
+    private static void sincronizarBancos() {
+        limpiarIntegracionAnterior();
+
         ArrayList<santi.modelo.Sucursal> sucursalesAdaptadas = MEDIADOR.getAdapterSantiago().adaptarSucursalesDeLeo(BANCO_LEO.getSucursalList());
-        /*Se agregan las sucursales adaptadas al banco de Santi*/
         agregarSucursalesAdaptadas(sucursalesAdaptadas);
-        /*Se adaptan las sucursales del banco de Santi y se agregan al de Leo*/
+
         BANCO_LEO.getSucursalList().addAll(MEDIADOR.getAdapterLeo().adaptarSucursalesDeSanti(BANCO_SANTI.getSucursales()));
+    }
+
+    private static void limpiarIntegracionAnterior() {
+        BANCO_SANTI.eliminarSucursalesConPrefijo(PREFIJO_SUCURSAL_LEO_EN_SANTI);
+        BANCO_LEO.getSucursalList().removeIf(sucursal -> sucursal.getNombre().startsWith(PREFIJO_SUCURSAL_SANTI_EN_LEO));
     }
 
     private static void agregarSucursalesAdaptadas (ArrayList<santi.modelo.Sucursal> sucursalesAdaptadas) {
         for (santi.modelo.Sucursal sucursalIterada : sucursalesAdaptadas) {
-            BANCO_SANTI.crearSucursal(sucursalIterada.getNombre());
-
             if (BANCO_SANTI.buscarSucursal(sucursalIterada.getNombre()) == null) {
                 BANCO_SANTI.crearSucursal(sucursalIterada.getNombre());
             }
