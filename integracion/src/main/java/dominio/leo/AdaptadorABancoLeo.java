@@ -39,10 +39,10 @@ public class AdaptadorABancoLeo {
                                 [RED BANCO SANTIAGO]\s""" + sucursalIterada.getNombre() + System.lineSeparator());
 
                 for (Cuenta cuentaIterada : sucursalIterada.getCuentas()) {
-                    traducirCuentaACliente(cuentaIterada, sucursalTraducida);
+                    adaptarCuentaACliente(cuentaIterada, sucursalTraducida);
 
                     for (Transaccion transaccionIterada : cuentaIterada.getHistorialTransacciones()) {
-                        traducirTransaccionATransferencia(transaccionIterada, sucursalTraducida);
+                        adaptarTransaccionATransferencia(transaccionIterada, sucursalTraducida);
                     }
                 }
                 sucursalesTraducidas.add(sucursalTraducida);
@@ -51,7 +51,7 @@ public class AdaptadorABancoLeo {
         return sucursalesTraducidas;
     }
 
-    public Cliente traducirCuentaACliente(Cuenta cuentaATraducir, leo.ModeloBanco.Sucursal sucursalPortadora) {
+    public Cliente adaptarCuentaACliente(Cuenta cuentaATraducir, leo.ModeloBanco.Sucursal sucursalPortadora) {
         String usuarioTraducido = cuentaATraducir.getEmail();
         String contraseñaTraducida = String.valueOf(cuentaATraducir.getPin());
         String nombreTraducido = cuentaATraducir.getNombre();
@@ -64,20 +64,20 @@ public class AdaptadorABancoLeo {
         return new Cliente.Builder(usuarioTraducido, contraseñaTraducida, nombreTraducido, "", "Dato desconocido").tipoCuenta(tipoCuentaTraducido).permisos("").build(sucursalPortadora.registro);
     }
 
-    public void traducirTransaccionATransferencia(Transaccion transaccionATraducir, leo.ModeloBanco.Sucursal sucursalPortadora) {
-        Boolean tipoTranferenciaTraducido = null;
+    public void adaptarTransaccionATransferencia(Transaccion transaccionATraducir, leo.ModeloBanco.Sucursal sucursalPortadora) {
+        Boolean esDepositoTraducido = null;
 
         if (transaccionATraducir.getTipoTransaccion() == TipoTransaccion.DEPOSITO) {
-            tipoTranferenciaTraducido = true;
+            esDepositoTraducido = true;
         } else if (transaccionATraducir.getTipoTransaccion() == TipoTransaccion.RETIRO) {
-            tipoTranferenciaTraducido = false;
+            esDepositoTraducido = false;
         }
 
-        Cliente origenTraducido = traducirCuentaACliente(transaccionATraducir.getOrigen(), sucursalPortadora);
-        Cliente destinoTraducido = traducirCuentaACliente(transaccionATraducir.getDestino(), sucursalPortadora);
+        Cliente origenTraducido = adaptarCuentaACliente(transaccionATraducir.getOrigen(), sucursalPortadora);
+        Cliente destinoTraducido = adaptarCuentaACliente(transaccionATraducir.getDestino(), sucursalPortadora);
 
-        if (tipoTranferenciaTraducido != null) {
-            new Transferencia.Builder(tipoTranferenciaTraducido, destinoTraducido, BigDecimal.valueOf(transaccionATraducir.getMonto())).fecha("Dato desconocido").acreditar(sucursalPortadora.auditor);
+        if (esDepositoTraducido != null) {
+            new Transferencia.Builder(esDepositoTraducido, destinoTraducido, BigDecimal.valueOf(transaccionATraducir.getMonto())).fecha("Dato desconocido").acreditar(sucursalPortadora.auditor);
         } else {
             new Transferencia.Builder(origenTraducido, destinoTraducido, BigDecimal.valueOf(transaccionATraducir.getMonto())).fecha("Dato desconocido").acreditar(sucursalPortadora.auditor);
         }
