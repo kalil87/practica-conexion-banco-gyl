@@ -14,13 +14,14 @@ Todas estas inyecciones son hard-codeadas a modo de ejemplo*/
 public class DataBaseInjector extends DataBase {
 
     public DataBaseInjector(){
-        new DataBaseInjector(false);
+        this.DataBaseInjector(false);
     }
-    public DataBaseInjector(boolean testMode){
+    public DataBaseInjector DataBaseInjector(boolean testMode){
         cargarSucursales();
         if (testMode) {cargarTests();}
         if (testMode) {cargarDuplicados();}
         cargarClientes(getCentral());
+        return this;
     }
 
     public Sucursal getCentral(){
@@ -31,8 +32,8 @@ public class DataBaseInjector extends DataBase {
         return new Sucursal("Central","Calle Central 5","14-04-1998");
     }
     private void cargarSucursales(){
-        getSucursalList().add(cargarCentral());
-        getSucursalList().add(new Sucursal("Parque Patricios", "MonteAgudo 255", "16-04-2026"));
+        cargarSucursal(cargarCentral());
+        cargarSucursal(new Sucursal("Parque Patricios", "MonteAgudo 255", "16-04-2026"));
     }
 
     private void cargarDuplicados(){
@@ -85,9 +86,9 @@ public class DataBaseInjector extends DataBase {
                     .permisos("ADMIN")
                     .saldo(BigDecimal.valueOf(8888))
                     .build(iSucursal.registro);
-        }
 
-        getSucursalList().addAll(List.of(replica));
+            cargarSucursal(iSucursal);
+        }
     }
 
     private void cargarTests() {
@@ -115,7 +116,7 @@ public class DataBaseInjector extends DataBase {
         new Transferencia.Builder(objSucursalTest.registro.buscarUsername("test"), objSucursalTest.registro.buscarUsername("testuser"), BigDecimal.TEN)
                 .acreditar(objSucursalTest.auditor);
 
-        getSucursalList().add(objSucursalTest);
+        cargarSucursal(objSucursalTest);
     }
 
     private void cargarClientes(Sucursal sucursal) {
