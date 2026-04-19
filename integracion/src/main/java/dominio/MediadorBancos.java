@@ -6,9 +6,12 @@ import leo.ServicioDataBase.DataBase;
 import santi.modelo.Banco;
 import santi.modelo.Cuenta;
 import santi.modelo.Sucursal;
+import santi.modelo.Transaccion;
 
-import javax.print.attribute.standard.Media;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MediadorBancos {
     private static final AdaptadorABancoLeo adapterLeo = new AdaptadorABancoLeo();
@@ -17,6 +20,7 @@ public class MediadorBancos {
     private static final String PREFIJO_SUCURSAL_SANTI_EN_LEO = "[Banco Santi] ";
     private DataBase BANCO_LEO;
     private Banco BANCO_SANTI;
+    private final Map<String, List<TransaccionPersistida>> historialTransferenciasSanti = new HashMap<>();
 
     public MediadorBancos(DataBase bancoLeo, Banco bancoSanti){
         this.BANCO_LEO = bancoLeo;
@@ -36,13 +40,92 @@ public class MediadorBancos {
 
         ArrayList<Sucursal> sucursalesAdaptadas = getAdapterSantiago().adaptarSucursalesDeLeo(BANCO_LEO.getSucursalList());
         agregarSucursalesAdaptadas(sucursalesAdaptadas);
+        restaurarHistorialTransferenciasSanti();
 
         BANCO_LEO.getSucursalList().addAll(getAdapterLeo().adaptarSucursalesDeSanti(BANCO_SANTI.getSucursales()));
     }
 
     private void limpiarIntegracionAnterior() {
+        persistirHistorialTransferenciasSanti();
         BANCO_SANTI.eliminarSucursalesConPrefijo(PREFIJO_SUCURSAL_LEO_EN_SANTI);
         BANCO_LEO.getSucursalList().removeIf(sucursal -> sucursal.getNombre().startsWith(PREFIJO_SUCURSAL_SANTI_EN_LEO));
+    }
+
+    private void persistirHistorialTransferenciasSanti() {
+        historialTransferenciasSanti.clear();
+
+        for (Sucursal sucursal : BANCO_SANTI.getSucursales()) {
+            if (!sucursal.getNombre().startsWith(PREFIJO_SUCURSAL_LEO_EN_SANTI)) {
+                continue;
+            }
+
+            for (Cuenta cuenta : sucursal.getCuentas()) {
+                List<TransaccionPersistida> historialCuenta = historialTransferenciasSanti.computeIfAbsent(
+                        cuenta.getEmail(),
+                        ignored -> new ArrayList<>()
+                );
+
+                for (Transaccion transaccion : cuenta.getHistorialTransacciones()) {
+                    historialCuenta.add(new TransaccionPersistida(
+                            transaccion.getOrigen() != null ? transaccion.getOrigen().getEmail() : null,
+                            transaccion.getDestino() != null ? transaccion.getDestino().getEmail() : null,
+                            transaccion.getMonto(),
+                            transaccion.getTipoTransaccion()
+                    ));
+                }
+            }
+        }
+    }
+
+    private void restaurarHistorialTransferenciasSanti() {
+        for (Map.Entry<String, List<TransaccionPersistida>> entry : historialTransferenciasSanti.entrySet()) {
+            Cuenta cuenta = BANCO_SANTI.buscarCuentaBanco(entry.getKey());
+            if (cuenta == null) {
+                continue;
+            }
+
+            for (TransaccionPersistida transaccionPersistida : entry.getValue()) {
+                if (cuentaYaTieneTransaccion(cuenta, transaccionPersistida)) {
+                    continue;
+                }
+
+                Cuenta origen = transaccionPersistida.emailOrigen() != null
+                        ? BANCO_SANTI.buscarCuentaBanco(transaccionPersistida.emailOrigen())
+                        : null;
+                Cuenta destino = transaccionPersistida.emailDestino() != null
+                        ? BANCO_SANTI.buscarCuentaBanco(transaccionPersistida.emailDestino())
+                        : null;
+
+                cuenta.agregarTransaccionHistorial(
+                        new Transaccion(origen, destino, transaccionPersistida.monto(), transaccionPersistida.tipo())
+                );
+            }
+        }
+
+        historialTransferenciasSanti.clear();
+    }
+
+    private boolean cuentaYaTieneTransaccion(Cuenta cuenta, TransaccionPersistida transaccionBuscada) {
+        for (Transaccion transaccion : cuenta.getHistorialTransacciones()) {
+            String emailOrigen = transaccion.getOrigen() != null ? transaccion.getOrigen().getEmail() : null;
+            String emailDestino = transaccion.getDestino() != null ? transaccion.getDestino().getEmail() : null;
+
+            if (emailsIguales(emailOrigen, transaccionBuscada.emailOrigen())
+                    && emailsIguales(emailDestino, transaccionBuscada.emailDestino())
+                    && transaccion.getTipoTransaccion() == transaccionBuscada.tipo()
+                    && Double.compare(transaccion.getMonto(), transaccionBuscada.monto()) == 0) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private boolean emailsIguales(String emailA, String emailB) {
+        if (emailA == null || emailB == null) {
+            return emailA == null && emailB == null;
+        }
+        return emailA.equalsIgnoreCase(emailB);
     }
 
     private void agregarSucursalesAdaptadas (ArrayList<santi.modelo.Sucursal> sucursalesAdaptadas) {
@@ -64,4 +147,6 @@ public class MediadorBancos {
             }
         }
     }
+
+    private record TransaccionPersistida(String emailOrigen, String emailDestino, double monto, santi.modelo.TipoTransaccion tipo) {}
 }
