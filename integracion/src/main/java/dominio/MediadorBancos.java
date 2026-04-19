@@ -21,6 +21,7 @@ public class MediadorBancos {
     private DataBase BANCO_LEO;
     private Banco BANCO_SANTI;
     private final Map<String, List<TransaccionPersistida>> historialTransferenciasSanti = new HashMap<>();
+    private final Map<String, List<TransaccionPersistida>> historialTransferenciasDesdeLeo = new HashMap<>();
 
     public MediadorBancos(DataBase bancoLeo, Banco bancoSanti){
         this.BANCO_LEO = bancoLeo;
@@ -47,6 +48,7 @@ public class MediadorBancos {
 
     private void limpiarIntegracionAnterior() {
         persistirHistorialTransferenciasSanti();
+        persistirHistorialTransferenciasDesdeLeo();
         BANCO_SANTI.eliminarSucursalesConPrefijo(PREFIJO_SUCURSAL_LEO_EN_SANTI);
         BANCO_LEO.getSucursalList().removeIf(sucursal -> sucursal.getNombre().startsWith(PREFIJO_SUCURSAL_SANTI_EN_LEO));
     }
@@ -77,8 +79,37 @@ public class MediadorBancos {
         }
     }
 
+    private void persistirHistorialTransferenciasDesdeLeo() {
+        historialTransferenciasDesdeLeo.clear();
+
+        for (leo.ModeloBanco.Sucursal sucursal : BANCO_LEO.getSucursalList()) {
+            if (!sucursal.getNombre().startsWith(PREFIJO_SUCURSAL_SANTI_EN_LEO)) {
+                continue;
+            }
+
+            for (leo.ModeloBanco.Transferencia.Transferencia transferencia : sucursal.auditor.getAuditoria()) {
+                if (transferencia.getTransaccion() != leo.ModeloBanco.Transferencia.TipoTransaccion.TRANSFERENCIA) {
+                    continue;
+                }
+
+                String emailOrigen = normalizarEmailLeo(transferencia.getEmisor().getUsername());
+                String emailDestino = normalizarEmailLeo(transferencia.getReceptor().getUsername());
+                double monto = transferencia.getMonto().doubleValue();
+
+                agregarTransaccionPersistida(historialTransferenciasDesdeLeo, emailOrigen,
+                        new TransaccionPersistida(emailOrigen, emailDestino, monto, santi.modelo.TipoTransaccion.TRANSFERENCIA_ENVIADA));
+                agregarTransaccionPersistida(historialTransferenciasDesdeLeo, emailDestino,
+                        new TransaccionPersistida(emailOrigen, emailDestino, monto, santi.modelo.TipoTransaccion.TRANSFERENCIA_RECIBIDA));
+            }
+        }
+    }
+
     private void restaurarHistorialTransferenciasSanti() {
-        for (Map.Entry<String, List<TransaccionPersistida>> entry : historialTransferenciasSanti.entrySet()) {
+        Map<String, List<TransaccionPersistida>> historialCombinado = new HashMap<>();
+        copiarHistorial(historialTransferenciasSanti, historialCombinado);
+        copiarHistorial(historialTransferenciasDesdeLeo, historialCombinado);
+
+        for (Map.Entry<String, List<TransaccionPersistida>> entry : historialCombinado.entrySet()) {
             Cuenta cuenta = BANCO_SANTI.buscarCuentaBanco(entry.getKey());
             if (cuenta == null) {
                 continue;
@@ -103,6 +134,30 @@ public class MediadorBancos {
         }
 
         historialTransferenciasSanti.clear();
+        historialTransferenciasDesdeLeo.clear();
+    }
+
+    private void copiarHistorial(Map<String, List<TransaccionPersistida>> origen, Map<String, List<TransaccionPersistida>> destino) {
+        for (Map.Entry<String, List<TransaccionPersistida>> entry : origen.entrySet()) {
+            for (TransaccionPersistida transaccionPersistida : entry.getValue()) {
+                agregarTransaccionPersistida(destino, entry.getKey(), transaccionPersistida);
+            }
+        }
+    }
+
+    private void agregarTransaccionPersistida(
+            Map<String, List<TransaccionPersistida>> historial,
+            String emailCuenta,
+            TransaccionPersistida transaccion
+    ) {
+        historial.computeIfAbsent(emailCuenta, ignored -> new ArrayList<>()).add(transaccion);
+    }
+
+    private String normalizarEmailLeo(String usernameLeo) {
+        if (usernameLeo.contains("@")) {
+            return usernameLeo;
+        }
+        return usernameLeo + "@bancoleo.com";
     }
 
     private boolean cuentaYaTieneTransaccion(Cuenta cuenta, TransaccionPersistida transaccionBuscada) {
