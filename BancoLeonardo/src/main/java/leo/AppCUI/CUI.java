@@ -18,6 +18,7 @@ public class CUI {
     private DataReader dr;
     private AuditReader ar;
     private SucursalReader sr;
+    private final Scanner scanner = new Scanner(System.in);
 
     public void setSucursalList(ArrayList<Sucursal> sucursalList) {
         this.sucursalList = sucursalList;
@@ -66,18 +67,19 @@ public class CUI {
     }
 
     private String scanValidate(){
-        Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
+        return scanner.nextLine().trim();
     }
 
     private BigDecimal scanValidateMonto(){
-        Scanner sc = new Scanner(System.in);
-        while (!sc.hasNextBigDecimal()) {
-            System.out.println("Error: No es un número.");
-            sc.next();
-            System.out.print("Introduzca un monto válido: ");
+        while (true) {
+            String input = scanValidate();
+            try {
+                return new BigDecimal(input);
+            } catch (NumberFormatException error) {
+                System.out.println("Error: No es un número.");
+                System.out.print("Introduzca un monto válido: ");
+            }
         }
-        return sc.nextBigDecimal();
     }
 
     private Cliente scanValidateCliente(){
@@ -95,21 +97,28 @@ public class CUI {
         if (emisor == null) {return false;}
         if (receptor == null) {return false;}
         if (monto == null) {return false;}
+        if (monto.compareTo(BigDecimal.ZERO) <= 0) {return false;}
+        if (emisor.getSaldo().compareTo(monto) < 0) {return false;}
         return true;
     }
 
+    private boolean validateTransferenciaConSaldo(Cliente emisor, Cliente receptor, BigDecimal monto){
+        if (!validateTransferencia(emisor, receptor, monto)) {return false;}
+        return emisor.getSaldo().compareTo(monto) >= 0;
+    }
+
     private int scanOptionList(String[] options){
-        Scanner sc = new Scanner(System.in);
         printOptionList(options);
 
         int userChoice;
         do {
-            while (!sc.hasNextInt()) {
+            String input = scanValidate();
+            while (!input.matches("\\d+")) {
                 System.out.println("Error: No es un número.");
-                sc.next();
                 System.out.print("Elija un comando válido: ");
+                input = scanValidate();
             }
-            userChoice = sc.nextInt();
+            userChoice = Integer.parseInt(input);
             if (userChoice <= 0 || userChoice > options.length) {
                 System.out.println("Error: Comando no válido.");
                 System.out.print("Elija un comando válido: ");
@@ -181,7 +190,7 @@ public class CUI {
                         optionsMenu[1] = optionsLabel[1] + monto.toString();
                     }
                     case 2 -> {
-                        if (validateTransferencia(activeUser.getCuenta(), receptor, monto)) {
+                        if (validateTransferenciaConSaldo(activeUser.getCuenta(), receptor, monto)) {
                             new Transferencia.Builder(activeUser.getCuenta(), receptor, monto)
                                     .fecha(LocalDateTime.now().toString())
                                     .acreditar(ar.source);

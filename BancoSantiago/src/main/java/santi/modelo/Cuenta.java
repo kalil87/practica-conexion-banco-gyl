@@ -24,6 +24,17 @@ public class Cuenta {
         historialTransacciones = new ArrayList<>();
     }
 
+    public Cuenta(String nombre, String email, int pin, double saldo, boolean permisosAdmin, Sucursal sucursal, TipoCuenta tipoCuenta) {
+        setNombre(nombre);
+        setEmail(email);
+        setPin(pin);
+        this.admin = permisosAdmin;
+        setSucursal(sucursal);
+        setTipoCuenta(tipoCuenta);
+        setSaldo(saldo);
+        historialTransacciones = new ArrayList<>();
+    }
+
     public void agregarTransaccionHistorial(Transaccion transaccionNueva) {
         historialTransacciones.add(transaccionNueva);
     }
@@ -115,6 +126,13 @@ public class Cuenta {
             throw new IllegalArgumentException("(Cuenta, setPin) el pin es inválido");
         }
         this.pin = pin;
+    }
+
+    public void setSaldo(double saldo) {
+        if (saldo < 0) {
+            throw new IllegalArgumentException("(Cuenta, setSaldo) el monto no puede ser negativo");
+        }
+        this.saldo = saldo;
     }
 
     private void setSucursal(Sucursal sucursal) {

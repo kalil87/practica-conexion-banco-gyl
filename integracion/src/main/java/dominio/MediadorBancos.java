@@ -43,7 +43,7 @@ public class MediadorBancos {
         agregarSucursalesAdaptadas(sucursalesAdaptadas);
         restaurarHistorialTransferenciasSanti();
 
-        bancoLeo.getSucursalList().addAll(getAdapterLeo().adaptarSucursalesDeSanti(bancoSanti.getSucursales()));
+        bancoLeo.getSucursalList().addAll(getAdapterLeo().adaptarSucursalesDeSanti(bancoSanti.getSucursales(), bancoLeo.getSucursalList()));
     }
 
     private void limpiarIntegracionAnterior() {
@@ -130,11 +130,28 @@ public class MediadorBancos {
                 cuenta.agregarTransaccionHistorial(
                         new Transaccion(origen, destino, transaccionPersistida.monto(), transaccionPersistida.tipo())
                 );
+                aplicarImpactoSaldoSiCorresponde(cuenta, transaccionPersistida);
             }
         }
 
         historialTransferenciasSanti.clear();
         historialTransferenciasDesdeLeo.clear();
+    }
+
+    private void aplicarImpactoSaldoSiCorresponde(Cuenta cuenta, TransaccionPersistida transaccionPersistida) {
+        double monto = transaccionPersistida.monto();
+        if (monto < 1) {
+            return;
+        }
+
+        switch (transaccionPersistida.tipo()) {
+            case DEPOSITO, TRANSFERENCIA_RECIBIDA -> cuenta.agregarSaldo(monto);
+            case RETIRO, TRANSFERENCIA_ENVIADA -> {
+                if (cuenta.getSaldo() >= monto) {
+                    cuenta.restarSaldo(monto);
+                }
+            }
+        }
     }
 
     private void copiarHistorial(Map<String, List<TransaccionPersistida>> origen, Map<String, List<TransaccionPersistida>> destino) {
@@ -192,13 +209,30 @@ public class MediadorBancos {
             Sucursal sucursalEspejo = bancoSanti.buscarSucursal(sucursalIterada.getNombre());
 
             for (Cuenta cuentaIterada : sucursalIterada.getCuentas()) {
-                if (sucursalEspejo.buscarCuentaSucursal(cuentaIterada.getEmail()) == null) {
-                    Cuenta cuentaEspejo = sucursalEspejo.crearCuenta(cuentaIterada.getNombre(), cuentaIterada.getEmail(), cuentaIterada.getPin(), cuentaIterada.isAdmin(), cuentaIterada.getTipoCuenta());
+                Cuenta cuentaEspejo = sucursalEspejo.buscarCuentaSucursal(cuentaIterada.getEmail());
 
-                    if (cuentaEspejo != null && cuentaIterada.getSaldo() > 0) {
-                        cuentaEspejo.agregarSaldo(cuentaIterada.getSaldo());
-                    }
+                if (cuentaEspejo == null) {
+                    cuentaEspejo = sucursalEspejo.crearCuenta(cuentaIterada.getNombre(), cuentaIterada.getEmail(), cuentaIterada.getPin(), cuentaIterada.isAdmin(), cuentaIterada.getTipoCuenta());
                 }
+
+                if (cuentaEspejo != null) {
+                    sincronizarSaldoCuenta(cuentaEspejo, cuentaIterada.getSaldo());
+                }
+            }
+        }
+    }
+
+    private void sincronizarSaldoCuenta(Cuenta cuentaDestino, double saldoEsperado) {
+        double saldoObjetivo = Math.max(0, saldoEsperado);
+        double diferencia = saldoObjetivo - cuentaDestino.getSaldo();
+
+        if (diferencia >= 1) {
+            cuentaDestino.agregarSaldo(diferencia);
+        } else if (diferencia <= -1) {
+            double montoARestar = Math.min(cuentaDestino.getSaldo(), Math.abs(diferencia));
+
+            if (montoARestar >= 1) {
+                cuentaDestino.restarSaldo(montoARestar);
             }
         }
     }

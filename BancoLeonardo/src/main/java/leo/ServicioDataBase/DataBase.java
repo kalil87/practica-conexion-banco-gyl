@@ -5,7 +5,7 @@ import leo.ModeloBanco.Sucursal;
 import java.util.ArrayList;
 
 public class DataBase {
-    private ArrayList<Sucursal> sucursalList = new ArrayList<>();
+    private final ArrayList<Sucursal> sucursalList = new ArrayList<>();
 
     public ArrayList<Sucursal> getSucursalList() {
         return sucursalList;

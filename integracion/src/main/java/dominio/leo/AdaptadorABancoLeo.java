@@ -11,7 +11,10 @@ import santi.modelo.TipoTransaccion;
 import santi.modelo.Transaccion;
 
 public class AdaptadorABancoLeo {
-    public ArrayList<leo.ModeloBanco.Sucursal> adaptarSucursalesDeSanti(List<Sucursal> sucursalesSanti) {
+    public ArrayList<leo.ModeloBanco.Sucursal> adaptarSucursalesDeSanti(
+            List<Sucursal> sucursalesSanti,
+            List<leo.ModeloBanco.Sucursal> sucursalesLeo
+    ) {
         ArrayList<leo.ModeloBanco.Sucursal> sucursalesTraducidas = new ArrayList<>();
 
         for (santi.modelo.Sucursal sucursalIterada : sucursalesSanti) {
@@ -38,10 +41,10 @@ public class AdaptadorABancoLeo {
                                 [RED BANCO SANTIAGO]\s""" + sucursalIterada.getNombre() + System.lineSeparator());
 
                 for (Cuenta cuentaIterada : sucursalIterada.getCuentas()) {
-                    adaptarCuentaACliente(cuentaIterada, sucursalTraducida);
+                    adaptarCuentaACliente(cuentaIterada, sucursalTraducida, sucursalesLeo);
 
                     for (Transaccion transaccionIterada : cuentaIterada.getHistorialTransacciones()) {
-                        adaptarTransaccionATransferencia(transaccionIterada, sucursalTraducida);
+                        adaptarTransaccionATransferencia(transaccionIterada, sucursalTraducida, sucursalesLeo);
                     }
                 }
                 sucursalesTraducidas.add(sucursalTraducida);
@@ -50,7 +53,16 @@ public class AdaptadorABancoLeo {
         return sucursalesTraducidas;
     }
 
-    public Cliente adaptarCuentaACliente(Cuenta cuentaATraducir, leo.ModeloBanco.Sucursal sucursalPortadora) {
+    public Cliente adaptarCuentaACliente(
+            Cuenta cuentaATraducir,
+            leo.ModeloBanco.Sucursal sucursalPortadora,
+            List<leo.ModeloBanco.Sucursal> sucursalesLeo
+    ) {
+        Cliente clienteLeoExistente = buscarClienteLeoExistente(cuentaATraducir.getEmail(), sucursalesLeo);
+        if (clienteLeoExistente != null) {
+            return clienteLeoExistente;
+        }
+
         String usuarioTraducido = cuentaATraducir.getEmail();
         String contraseñaTraducida = String.valueOf(cuentaATraducir.getPin());
         String nombreTraducido = cuentaATraducir.getNombre();
@@ -59,11 +71,16 @@ public class AdaptadorABancoLeo {
             case CUENTA_CORRIENTE -> "Corriente";
             case BANCO_EXTERNO -> "Externa";
         };
+        BigDecimal saldoTraducido = BigDecimal.valueOf(cuentaATraducir.getSaldo());
 
-        return new Cliente.Builder(usuarioTraducido, contraseñaTraducida, nombreTraducido, "", "Dato desconocido").tipoCuenta(tipoCuentaTraducido).permisos("").build(sucursalPortadora.registro);
+        return new Cliente.Builder(usuarioTraducido, contraseñaTraducida, nombreTraducido, "", "Dato desconocido").saldo(saldoTraducido).tipoCuenta(tipoCuentaTraducido).permisos("").build(sucursalPortadora.registro);
     }
 
-    public void adaptarTransaccionATransferencia(Transaccion transaccionATraducir, leo.ModeloBanco.Sucursal sucursalPortadora) {
+    public void adaptarTransaccionATransferencia(
+            Transaccion transaccionATraducir,
+            leo.ModeloBanco.Sucursal sucursalPortadora,
+            List<leo.ModeloBanco.Sucursal> sucursalesLeo
+    ) {
         Boolean esDepositoTraducido = null;
 
         if (transaccionATraducir.getTipoTransaccion() == TipoTransaccion.DEPOSITO) {
@@ -71,13 +88,36 @@ public class AdaptadorABancoLeo {
         } else if (transaccionATraducir.getTipoTransaccion() == TipoTransaccion.RETIRO) {
             esDepositoTraducido = false;
         }
-        Cliente destinoTraducido = adaptarCuentaACliente(transaccionATraducir.getDestino(), sucursalPortadora);
+        Cuenta cuentaDestino = transaccionATraducir.getDestino() != null
+                ? transaccionATraducir.getDestino()
+                : transaccionATraducir.getOrigen();
+        Cliente destinoTraducido = adaptarCuentaACliente(cuentaDestino, sucursalPortadora, sucursalesLeo);
 
         if (esDepositoTraducido != null) {
             new Transferencia.Builder(esDepositoTraducido, destinoTraducido, BigDecimal.valueOf(transaccionATraducir.getMonto())).fecha("Dato desconocido").acreditar(sucursalPortadora.auditor);
         } else {
-            Cliente origenTraducido = adaptarCuentaACliente(transaccionATraducir.getOrigen(), sucursalPortadora);
+            Cliente origenTraducido = adaptarCuentaACliente(transaccionATraducir.getOrigen(), sucursalPortadora, sucursalesLeo);
             new Transferencia.Builder(origenTraducido, destinoTraducido, BigDecimal.valueOf(transaccionATraducir.getMonto())).fecha("Dato desconocido").acreditar(sucursalPortadora.auditor);
         }
+    }
+
+    private Cliente buscarClienteLeoExistente(String email, List<leo.ModeloBanco.Sucursal> sucursalesLeo) {
+        String username = email;
+        if (email.endsWith("@bancoleo.com")) {
+            username = email.replace("@bancoleo.com", "");
+        }
+
+        for (leo.ModeloBanco.Sucursal sucursalLeo : sucursalesLeo) {
+            if (sucursalLeo.getNombre().startsWith("[Banco Santi] ")) {
+                continue;
+            }
+
+            Cliente cliente = sucursalLeo.registro.buscarUsername(username);
+            if (cliente != null) {
+                return cliente;
+            }
+        }
+
+        return null;
     }
 }

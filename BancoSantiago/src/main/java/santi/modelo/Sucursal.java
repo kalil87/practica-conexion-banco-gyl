@@ -26,6 +26,19 @@ public class Sucursal {
         return cuentaNueva;
     }
 
+    public Cuenta crearCuentaExterna(String nombreNuevo, String emailNuevo, int pinNuevo, double saldoNuevo, boolean permisosAdminNuevos, TipoCuenta tipoCuentaNuevo) {
+        Cuenta cuentaNueva = Banco.getInstancia().buscarCuentaBanco((emailNuevo));
+
+        if (cuentaNueva == null) {
+            cuentaNueva = new Cuenta(nombreNuevo, emailNuevo, pinNuevo, saldoNuevo, permisosAdminNuevos, this, tipoCuentaNuevo);
+            cuentas.add(cuentaNueva);
+        } else {
+            cuentaNueva = null;
+        }
+
+        return cuentaNueva;
+    }
+
     public void eliminarCuenta(Cuenta cuenta) {
         if (cuenta == null) {
             throw new IllegalArgumentException("(santiago.modelo.Sucursal, eliminarCuenta) la cuenta a eliminar es nula");

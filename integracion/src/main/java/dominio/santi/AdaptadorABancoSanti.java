@@ -1,5 +1,6 @@
 package dominio.santi;
 
+import java.util.ArrayList;
 import leo.ModeloBanco.Cliente.Cliente;
 import leo.ModeloBanco.Transferencia.Transferencia;
 import santi.modelo.Cuenta;
@@ -9,8 +10,6 @@ import santi.modelo.TipoTransaccion;
 import santi.modelo.Transaccion;
 import santi.servicio.OperacionesBancarias;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 
 public class AdaptadorABancoSanti {
     public ArrayList<santi.modelo.Sucursal> adaptarSucursalesDeLeo(ArrayList<leo.ModeloBanco.Sucursal> bancoLeo) {
@@ -36,18 +35,17 @@ public class AdaptadorABancoSanti {
     }
 
     public Cuenta adaptarClienteDeLeo(santi.modelo.Sucursal sucursalDestino, Cliente clienteLeo) {
-        Cuenta wrapperCliente = sucursalDestino.crearCuenta(clienteLeo.getNombre(),
-                clienteLeo.getUsername() + "@bancoleo.com",
-                4040,
-                false,
-                TipoCuenta.BANCO_EXTERNO);
-        if (clienteLeo.getSaldo().compareTo(BigDecimal.ZERO) > 0) {
-            wrapperCliente.agregarSaldo(
-                    clienteLeo.getSaldo().doubleValue()
-            );
+        double saldoInicial = clienteLeo.getSaldo().doubleValue();
+        if (saldoInicial < 0) {
+            saldoInicial = 0;
         }
 
-        return wrapperCliente;
+        return sucursalDestino.crearCuentaExterna(clienteLeo.getNombre(),
+                construirEmailLeo(clienteLeo.getUsername()),
+                4040,
+                saldoInicial,
+                false,
+                TipoCuenta.BANCO_EXTERNO);
     }
 
     public void adaptarTransferenciaDeLeo(Cuenta cuentaDestino, Transferencia transferenciaLeo) {
@@ -83,6 +81,9 @@ public class AdaptadorABancoSanti {
     }
 
     private String construirEmailLeo(String usernameLeo) {
+        if (usernameLeo.contains("@")) {
+            return usernameLeo;
+        }
         return usernameLeo + "@bancoleo.com";
     }
 }
