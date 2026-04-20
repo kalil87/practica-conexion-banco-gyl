@@ -98,8 +98,7 @@ public class CUI {
         if (receptor == null) {return false;}
         if (monto == null) {return false;}
         if (monto.compareTo(BigDecimal.ZERO) <= 0) {return false;}
-        if (emisor.getSaldo().compareTo(monto) < 0) {return false;}
-        return true;
+        return emisor.getSaldo().compareTo(monto) >= 0;
     }
 
     private boolean validateTransferenciaConSaldo(Cliente emisor, Cliente receptor, BigDecimal monto){
@@ -151,8 +150,8 @@ public class CUI {
         String[] optionsMenu = {"Volver"};
 
         printDataList(sr.getSucursalesPropiasToListString());
-        switch (scanOptionList(optionsMenu)) {
-            case 0 -> mainMenu();
+        if (scanOptionList(optionsMenu) == 0) {
+            mainMenu();
         }
     }
 
@@ -160,8 +159,8 @@ public class CUI {
         String[] optionsMenu = {"Volver"};
 
         printDataList(dr.clientelaToListString());
-        switch (scanOptionList(optionsMenu)) {
-            case 0 -> mainMenu();
+        if (scanOptionList(optionsMenu) == 0) {
+            mainMenu();
         }
     }
 
@@ -187,7 +186,7 @@ public class CUI {
                     }
                     case 1 -> {
                         monto = scanValidateMonto();
-                        optionsMenu[1] = optionsLabel[1] + monto.toString();
+                        optionsMenu[1] = optionsLabel[1] + monto;
                     }
                     case 2 -> {
                         if (validateTransferenciaConSaldo(activeUser.getCuenta(), receptor, monto)) {
@@ -232,7 +231,7 @@ public class CUI {
                 }
                 case 2 -> {
                     monto = scanValidateMonto();
-                    optionsMenu[2] = optionsLabel[2] + monto.toString();
+                    optionsMenu[2] = optionsLabel[2] + monto;
                 }
                 case 3 -> {
                     if (validateTransferencia(optionsValues[0],optionsValues[1], monto)) {
