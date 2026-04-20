@@ -1,15 +1,14 @@
 package dominio.leo;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import leo.ModeloBanco.Cliente.Cliente;
 import leo.ModeloBanco.Transferencia.Transferencia;
 import santi.modelo.Cuenta;
 import santi.modelo.Sucursal;
 import santi.modelo.TipoTransaccion;
 import santi.modelo.Transaccion;
-
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 public class AdaptadorABancoLeo {
     public ArrayList<leo.ModeloBanco.Sucursal> adaptarSucursalesDeSanti(List<Sucursal> sucursalesSanti) {

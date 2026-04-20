@@ -65,7 +65,7 @@ public class Menu {
                 2) Iniciar sesión
                 3) Salir de la sucursal""");
 
-        int opcion = procesarInput();
+        int opcion = procesarInputInt();
 
         switch (opcion) {
             case 1:
@@ -101,7 +101,7 @@ public class Menu {
                 6) Cerrar sesión
                 7) Salir de la sucursal""");
 
-        int opcion = procesarInput();
+        int opcion = procesarInputInt();
 
         switch (opcion) {
             case 1:
@@ -151,7 +151,7 @@ public class Menu {
                 7) Cerrar sesión
                 8) Salir de la sucursal""");
 
-        int opcion = procesarInput();
+        int opcion = procesarInputInt();
 
         switch (opcion) {
             case 1:
@@ -176,7 +176,7 @@ public class Menu {
                 mostrarResultadoMetodo(
                         procesarEliminacionAdmin(),
                         "\nCuenta eliminada con éxito\n",
-                        "\nVolviendo al menú de acciones (si no quiso hacer esto, probablemente ingresó un dato inválido)\n");
+                        "\nVolviendo al menú de acciones\n");
                 break;
             case 7:
                 sesionActiva = null;
@@ -195,23 +195,20 @@ public class Menu {
         TipoCuenta tipoCuentaNuevo = null;
 
         System.out.println("\nIngrese su nombre\n");
-
         String nombreNuevo = teclado.nextLine();
 
         System.out.println("\nIngrese su email\n");
-
         String emailNuevo = teclado.nextLine();
 
         System.out.println("\nIngrese su pin\n");
-
-        int pinNuevo = procesarInput();
+        int pinNuevo = procesarInputInt();
 
         System.out.println("""
                 Indique el tipo de cuenta que le gustaría crear:
                 1) Caja de ahorro
                 2) Cuenta corriente""");
 
-        int opcionCuenta = procesarInput();
+        int opcionCuenta = procesarInputInt();
 
         switch (opcionCuenta) {
             case 1 -> tipoCuentaNuevo = TipoCuenta.CAJA_AHORRO;
@@ -229,20 +226,28 @@ public class Menu {
         System.out.println("\nIngrese el nombre de la nueva sucursal\n");
         String nombreNuevaSucursal = teclado.nextLine();
         banco.crearSucursal(nombreNuevaSucursal);
+        System.out.println("\nSucursal creada con éxito\n");
     }
 
-    public int procesarInput() {
+    public int procesarInputInt() {
         String input = teclado.nextLine();
         if (!input.matches("\\d+")) {
-            throw new IllegalArgumentException("(Menu, procesarInput) la opción elegida no es un número");
+            throw new IllegalArgumentException("(Menu, procesarInputInt) la opción elegida no es un número");
         }
         return Integer.parseInt(input);
     }
 
+    public double procesarInputDouble() {
+        String input = teclado.nextLine();
+        if (!input.matches("\\d+")) {
+            throw new IllegalArgumentException("(Menu, procesarInputDouble) la opción elegida no es un número");
+        }
+        return Double.parseDouble(input);
+    }
+
     private double procesarDeposito() {
         System.out.println("\nIngrese el monto que desea depositar en su cuenta\n");
-
-        double montoDepositado = teclado.nextDouble();
+        double montoDepositado = procesarInputDouble();
 
         OperacionesBancarias.depositar(sesionActiva, montoDepositado);
 
@@ -251,8 +256,7 @@ public class Menu {
 
     private double procesarRetiro() {
         System.out.println("\nIngrese el monto que desea retirar de su cuenta\n");
-
-        double montoRetirado = teclado.nextDouble();
+        double montoRetirado = procesarInputDouble();
 
         OperacionesBancarias.retirar(sesionActiva, montoRetirado);
 
@@ -263,8 +267,7 @@ public class Menu {
         boolean resultado = false;
 
         System.out.println("\nIngrese el monto que desea transferir desde su cuenta\n");
-        double montoTransferido = teclado.nextDouble();
-        teclado.nextLine();
+        double montoTransferido = procesarInputDouble();
 
         System.out.println("\nIngrese el email de la persona a la que transferirá el dinero\n");
         String emailTransferido = teclado.nextLine();
@@ -296,12 +299,11 @@ public class Menu {
         boolean resultado = false;
 
         System.out.println("\nIngrese su email\n");
-
         String emailSesion = teclado.nextLine();
 
         System.out.println("\nIngrese su pin\n");
+        int pinSesion = procesarInputInt();
 
-        int pinSesion = procesarInput();
         Cuenta cuentaSesion = sucursalActiva.buscarCuentaSucursal(emailSesion);
 
         if (cuentaSesion != null) {
@@ -390,10 +392,10 @@ public class Menu {
     private boolean procesarEliminacion() {
         boolean resultado = false;
 
-        System.out.println("\n¿Está seguro que desea eliminar su cuenta? (Presione Enter para continuar)\n");
+        System.out.println("\n¿Desea proceder con la eliminación? (S/N)\n");
         String eliminar = teclado.nextLine();
 
-        if (eliminar.isBlank()) {
+        if (eliminar.equalsIgnoreCase("S")) {
             sucursalActiva.eliminarCuenta(sesionActiva);
             sesionActiva = null;
             resultado = true;
@@ -409,17 +411,21 @@ public class Menu {
         Cuenta cuentaEliminar = banco.buscarCuentaBanco(emailCuentaEliminar);
 
         if (cuentaEliminar != null) {
-            if (cuentaEliminar != sesionActiva) {
+            if (!cuentaEliminar.isAdmin()) {
                 System.out.println("\nLos datos de la cuenta seleccionada son los siguientes:\n");
                 System.out.println(cuentaEliminar);
-                System.out.println("¿Está seguro que desea eliminar esta cuenta? (Presione Enter para continuar)");
+                System.out.println("\n¿Desea proceder con la eliminación? (S/N)\n");
                 String eliminar = teclado.nextLine();
 
-                if (eliminar.isBlank()) {
+                if (eliminar.equalsIgnoreCase("S")) {
                     sucursalActiva.eliminarCuenta(cuentaEliminar);
                     resultado = true;
                 }
+            } else {
+                System.out.println("\nLas cuentas de administradores no pueden ser borradas\n");
             }
+        } else {
+            System.out.println("\nNo se ha encontrado una cuenta asociada con el email ingresado\n");
         }
         return resultado;
     }

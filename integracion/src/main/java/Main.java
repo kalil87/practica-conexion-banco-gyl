@@ -1,11 +1,8 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 import dominio.MediadorBancos;
 import leo.ServicioDataBase.DataBase;
 import leo.ServicioDataBase.DataBaseInjector;
 import santi.modelo.Banco;
-import santi.modelo.Cuenta;
-import santi.modelo.Sucursal;
 import santi.servicio.InicializadorBanco;
 import santi.ui.Menu;
 
@@ -34,13 +31,8 @@ public class Main {
                 int opcion = Integer.parseInt(input);
                 MEDIADOR.sincronizarBancos();
                 switch (opcion) {
-                    case 1 -> {
-
-                        new leo.App(BANCO_LEO);
-                    }
-                    case 2 -> {
-                        new Menu(BANCO_SANTI).mostrarMenuBanco();
-                    }
+                    case 1 -> new leo.App(BANCO_LEO);
+                    case 2 -> new Menu(BANCO_SANTI).mostrarMenuBanco();
                     case 0 -> isRunning = false;
                     default -> System.out.println("\nOpción inválida\n");
                 }
@@ -49,6 +41,4 @@ public class Main {
             }
         }
     }
-
-
 }

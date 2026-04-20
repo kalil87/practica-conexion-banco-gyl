@@ -1,7 +1,7 @@
 package dominio;
 
 import dominio.leo.AdaptadorABancoLeo;
-import dominio.santi.AdaptadorABancoSantiago;
+import dominio.santi.AdaptadorABancoSanti;
 import leo.ServicioDataBase.DataBase;
 import santi.modelo.Banco;
 import santi.modelo.Cuenta;
@@ -15,48 +15,48 @@ import java.util.Map;
 
 public class MediadorBancos {
     private static final AdaptadorABancoLeo adapterLeo = new AdaptadorABancoLeo();
-    private static final AdaptadorABancoSantiago adapterSantiago = new AdaptadorABancoSantiago();
+    private static final AdaptadorABancoSanti adapterSanti = new AdaptadorABancoSanti();
     private static final String PREFIJO_SUCURSAL_LEO_EN_SANTI = "[Banco Leo] ";
     private static final String PREFIJO_SUCURSAL_SANTI_EN_LEO = "[Banco Santi] ";
-    private DataBase BANCO_LEO;
-    private Banco BANCO_SANTI;
+    private final DataBase bancoLeo;
+    private final Banco bancoSanti;
     private final Map<String, List<TransaccionPersistida>> historialTransferenciasSanti = new HashMap<>();
     private final Map<String, List<TransaccionPersistida>> historialTransferenciasDesdeLeo = new HashMap<>();
 
     public MediadorBancos(DataBase bancoLeo, Banco bancoSanti){
-        this.BANCO_LEO = bancoLeo;
-        this.BANCO_SANTI = bancoSanti;
+        this.bancoLeo = bancoLeo;
+        this.bancoSanti = bancoSanti;
     }
 
     public AdaptadorABancoLeo getAdapterLeo() {
         return adapterLeo;
     }
 
-    public AdaptadorABancoSantiago getAdapterSantiago() {
-        return adapterSantiago;
+    public AdaptadorABancoSanti getAdapterSantiago() {
+        return adapterSanti;
     }
 
     public void sincronizarBancos() {
         limpiarIntegracionAnterior();
 
-        ArrayList<Sucursal> sucursalesAdaptadas = getAdapterSantiago().adaptarSucursalesDeLeo(BANCO_LEO.getSucursalList());
+        ArrayList<Sucursal> sucursalesAdaptadas = getAdapterSantiago().adaptarSucursalesDeLeo(bancoLeo.getSucursalList());
         agregarSucursalesAdaptadas(sucursalesAdaptadas);
         restaurarHistorialTransferenciasSanti();
 
-        BANCO_LEO.getSucursalList().addAll(getAdapterLeo().adaptarSucursalesDeSanti(BANCO_SANTI.getSucursales()));
+        bancoLeo.getSucursalList().addAll(getAdapterLeo().adaptarSucursalesDeSanti(bancoSanti.getSucursales()));
     }
 
     private void limpiarIntegracionAnterior() {
         persistirHistorialTransferenciasSanti();
         persistirHistorialTransferenciasDesdeLeo();
-        BANCO_SANTI.eliminarSucursalesConPrefijo(PREFIJO_SUCURSAL_LEO_EN_SANTI);
-        BANCO_LEO.getSucursalList().removeIf(sucursal -> sucursal.getNombre().startsWith(PREFIJO_SUCURSAL_SANTI_EN_LEO));
+        bancoSanti.eliminarSucursalesConPrefijo(PREFIJO_SUCURSAL_LEO_EN_SANTI);
+        bancoLeo.getSucursalList().removeIf(sucursal -> sucursal.getNombre().startsWith(PREFIJO_SUCURSAL_SANTI_EN_LEO));
     }
 
     private void persistirHistorialTransferenciasSanti() {
         historialTransferenciasSanti.clear();
 
-        for (Sucursal sucursal : BANCO_SANTI.getSucursales()) {
+        for (Sucursal sucursal : bancoSanti.getSucursales()) {
             if (!sucursal.getNombre().startsWith(PREFIJO_SUCURSAL_LEO_EN_SANTI)) {
                 continue;
             }
@@ -82,7 +82,7 @@ public class MediadorBancos {
     private void persistirHistorialTransferenciasDesdeLeo() {
         historialTransferenciasDesdeLeo.clear();
 
-        for (leo.ModeloBanco.Sucursal sucursal : BANCO_LEO.getSucursalList()) {
+        for (leo.ModeloBanco.Sucursal sucursal : bancoLeo.getSucursalList()) {
             if (!sucursal.getNombre().startsWith(PREFIJO_SUCURSAL_SANTI_EN_LEO)) {
                 continue;
             }
@@ -110,7 +110,7 @@ public class MediadorBancos {
         copiarHistorial(historialTransferenciasDesdeLeo, historialCombinado);
 
         for (Map.Entry<String, List<TransaccionPersistida>> entry : historialCombinado.entrySet()) {
-            Cuenta cuenta = BANCO_SANTI.buscarCuentaBanco(entry.getKey());
+            Cuenta cuenta = bancoSanti.buscarCuentaBanco(entry.getKey());
             if (cuenta == null) {
                 continue;
             }
@@ -121,10 +121,10 @@ public class MediadorBancos {
                 }
 
                 Cuenta origen = transaccionPersistida.emailOrigen() != null
-                        ? BANCO_SANTI.buscarCuentaBanco(transaccionPersistida.emailOrigen())
+                        ? bancoSanti.buscarCuentaBanco(transaccionPersistida.emailOrigen())
                         : null;
                 Cuenta destino = transaccionPersistida.emailDestino() != null
-                        ? BANCO_SANTI.buscarCuentaBanco(transaccionPersistida.emailDestino())
+                        ? bancoSanti.buscarCuentaBanco(transaccionPersistida.emailDestino())
                         : null;
 
                 cuenta.agregarTransaccionHistorial(
@@ -185,11 +185,11 @@ public class MediadorBancos {
 
     private void agregarSucursalesAdaptadas (ArrayList<santi.modelo.Sucursal> sucursalesAdaptadas) {
         for (santi.modelo.Sucursal sucursalIterada : sucursalesAdaptadas) {
-            if (BANCO_SANTI.buscarSucursal(sucursalIterada.getNombre()) == null) {
-                BANCO_SANTI.crearSucursal(sucursalIterada.getNombre());
+            if (bancoSanti.buscarSucursal(sucursalIterada.getNombre()) == null) {
+                bancoSanti.crearSucursal(sucursalIterada.getNombre());
             }
 
-            Sucursal sucursalEspejo = BANCO_SANTI.buscarSucursal(sucursalIterada.getNombre());
+            Sucursal sucursalEspejo = bancoSanti.buscarSucursal(sucursalIterada.getNombre());
 
             for (Cuenta cuentaIterada : sucursalIterada.getCuentas()) {
                 if (sucursalEspejo.buscarCuentaSucursal(cuentaIterada.getEmail()) == null) {

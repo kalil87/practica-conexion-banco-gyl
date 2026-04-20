@@ -13,11 +13,11 @@ public class Sucursal {
         cuentas = new ArrayList<>();
     }
 
-    public Cuenta crearCuenta(String nombre, String email, int pin, boolean permisosAdmin, TipoCuenta tipoCuenta) {
-        Cuenta cuentaNueva = buscarCuentaSucursal(email);
+    public Cuenta crearCuenta(String nombreNuevo, String emailNuevo, int pinNuevo, boolean permisosAdminNuevos, TipoCuenta tipoCuentaNuevo) {
+        Cuenta cuentaNueva = Banco.getInstancia().buscarCuentaBanco((emailNuevo));
 
         if (cuentaNueva == null) {
-            cuentaNueva = new Cuenta(nombre, email, pin, permisosAdmin, this, tipoCuenta);
+            cuentaNueva = new Cuenta(nombreNuevo, emailNuevo, pinNuevo, permisosAdminNuevos, this, tipoCuentaNuevo);
             cuentas.add(cuentaNueva);
         } else {
             cuentaNueva = null;

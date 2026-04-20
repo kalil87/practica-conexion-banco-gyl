@@ -5,7 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" name="Changes" comment="FEATURE / 19 - 04 /&#10;Se crea Clase DataBase, que tiene subclase DataBaseInjector. Todas las instancias esperan una clase DataBase para mayor legibilidad">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BancoSantiago/src/main/java/santi/modelo/Banco.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoSantiago/src/main/java/santi/modelo/Banco.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BancoSantiago/src/main/java/santi/modelo/Sucursal.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoSantiago/src/main/java/santi/modelo/Sucursal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BancoSantiago/src/main/java/santi/ui/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoSantiago/src/main/java/santi/ui/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integracion/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/src/main/java/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integracion/src/main/java/dominio/MediadorBancos.java" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/src/main/java/dominio/MediadorBancos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integracion/src/main/java/dominio/leo/AdaptadorABancoLeo.java" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/src/main/java/dominio/leo/AdaptadorABancoLeo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integracion/src/main/java/dominio/santi/AdaptadorABancoSantiago.java" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/src/main/java/dominio/santi/AdaptadorABancoSanti.java" afterDir="false" />
     </list>
     <list id="007dc272-28f4-4851-8ac7-feb95cbc242a" name="Changes by strillo" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -65,7 +72,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "Merging devLeno",
+    "git-widget-placeholder": "devSanti",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",

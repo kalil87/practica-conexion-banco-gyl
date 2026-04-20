@@ -12,7 +12,7 @@ import santi.servicio.OperacionesBancarias;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-public class AdaptadorABancoSantiago {
+public class AdaptadorABancoSanti {
     public ArrayList<santi.modelo.Sucursal> adaptarSucursalesDeLeo(ArrayList<leo.ModeloBanco.Sucursal> bancoLeo) {
         ArrayList<santi.modelo.Sucursal> listaWrapper = new ArrayList<>();
 
