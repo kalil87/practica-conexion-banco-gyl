@@ -2,6 +2,7 @@ package leo.AppCUI;
 
 import leo.ModeloBanco.Transferencia.InterfaceTransferencia;
 import leo.ModeloBanco.Transferencia.Transferencia;
+import leo.ModeloBanco.Cliente.Cliente;
 
 import java.util.ArrayList;
 
@@ -34,11 +35,23 @@ public class AuditReader {
         return "Error al leer Tipo de Transacción | " + source.getFecha();
     }
 
-    public ArrayList<String> auditToListString(){
-        ArrayList<Transferencia> auditList = source.getAuditoria();
-        ArrayList<String> lista = new ArrayList<>();
-        auditList.forEach(c -> lista.add(logToString(c)));
-        return lista;
+    public ArrayList<Transferencia> getAllTransferenciasOfCliente(Cliente cliente){
+        ArrayList<Transferencia> transferenciasOfCliente = new ArrayList<>();
+        source.getAuditoria().forEach(t -> {
+            if (t.getEmisor() == cliente || t.getReceptor() == cliente) {transferenciasOfCliente.add(t);}
+        });
+        return transferenciasOfCliente;
+    }
+
+    public ArrayList<String> makeListString(ArrayList<Transferencia> audit){
+        ArrayList<String> result = new ArrayList<>();
+        if (audit == null) {return result;}
+        audit.forEach(t -> result.add(logToString(t)));
+        return result;
+    }
+
+    public ArrayList<String> getAuditToListString(){
+        return makeListString(source.getAuditoria());
     }
 
     public int getDataMapSize(){

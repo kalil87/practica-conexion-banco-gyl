@@ -2,7 +2,7 @@ package leo.AppCUI;
 
 import leo.ModeloBanco.Cliente.Cliente;
 import leo.ModeloBanco.Sucursal;
-import leo.ServicioDataBase.DataBaseInjector;
+import leo.ServicioDataBase.DataBase;
 
 import java.util.Scanner;
 
@@ -23,9 +23,10 @@ public class UserLogin {
         this.pass = password;
         this.admin = true;
     }
-    public UserLogin(DataBaseInjector database){
+    public UserLogin(DataBase database){
         validateLogInDB(database,scannerLogIn());
         this.admin = validateAdminPerms(cuenta);
+
     }
 
     public String getUser(){
@@ -69,7 +70,7 @@ public class UserLogin {
         return false; //Por si salgo del bucle de validación
     }
 
-    private boolean validateLogInDB(DataBaseInjector db, String[] inputs){
+    private boolean validateLogInDB(DataBase db, String[] inputs){
         for (Sucursal iSucursal : db.getSucursalList()){
             Cliente iCliente = iSucursal.registro.buscarUsername(inputs[0]);
             if (iCliente != null){
@@ -77,6 +78,8 @@ public class UserLogin {
                     System.out.println("Bienvenido " + iCliente.getNombreCompleto());
                     this.sucursal = iSucursal;
                     this.cuenta = iCliente;
+                    this.user = this.cuenta.getUsername();
+                    this.pass = this.cuenta.getPassword();
                     return true;
                 }
                 break; //Si existe usuario pero la contraseña está mal, entonces dejo de buscar

@@ -1,8 +1,8 @@
-package santiago.modelo;
+package santi.modelo;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Collections;
+import java.util.List;
 
 public final class Banco {
     private static Banco instancia;
@@ -20,6 +20,14 @@ public final class Banco {
             throw new IllegalStateException("(Banco, crearSucursal) ya existe una sucursal con el nombre ingresado");
         }
         sucursales.add(new Sucursal(nombreNuevo));
+    }
+
+    public void eliminarSucursalesConPrefijo(String prefijo) {
+        if (prefijo == null || prefijo.isBlank()) {
+            return;
+        }
+
+        sucursales.removeIf(sucursal -> sucursal.getNombre().startsWith(prefijo));
     }
 
     public Sucursal buscarSucursal(String nombreBuscado) {

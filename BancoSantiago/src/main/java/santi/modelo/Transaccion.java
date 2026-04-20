@@ -1,4 +1,4 @@
-package santiago.modelo;
+package santi.modelo;
 
 public class Transaccion {
     private final Cuenta origen, destino;

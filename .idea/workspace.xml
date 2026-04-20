@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" name="Changes" comment="FEATURE/ 16 - 04 /&#10;Creacion AdaptadorBancoLeo.java&#10;Se asigna packages leo y santiago a sus respectivos proyectos.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BancoSantiago/src/main/java/santiago/modelo/Transaccion.java" beforeDir="false" afterPath="$PROJECT_DIR$/BancoSantiago/src/main/java/santiago/modelo/Transaccion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integracion/src/main/java/dominio/leo/AdaptadorABancoLeo.java" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/src/main/java/dominio/leo/AdaptadorABancoLeo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integracion/src/main/java/dominio/leo/InterfaceABancoLeo.java" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/src/main/java/dominio/leo/InterfaceABancoLeo.java" afterDir="false" />
+    <list default="true" id="fa8e6f54-f8d9-4067-9ce1-ab69a48f8c7e" name="Changes" comment="FEATURE / 19 - 04 /&#10;Se crea Clase DataBase, que tiene subclase DataBaseInjector. Todas las instancias esperan una clase DataBase para mayor legibilidad">
+      <change beforePath="$PROJECT_DIR$/integracion/src/main/java/dominio/MediadorBancos.java" beforeDir="false" afterPath="$PROJECT_DIR$/integracion/src/main/java/dominio/MediadorBancos.java" afterDir="false" />
     </list>
-    <list id="3867bc3a-88c1-431b-b18b-f9ee6b753899" name="Changes by strillo" comment="" />
+    <list id="007dc272-28f4-4851-8ac7-feb95cbc242a" name="Changes by strillo" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,7 +25,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="codex/task-title-eq2rp8" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -59,6 +56,8 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Main (1).executor": "Run",
+    "Application.Main Integracion.executor": "Run",
     "Application.Main.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -66,7 +65,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "desarrollo-santi",
+    "git-widget-placeholder": "Merging devLeno",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -80,11 +79,22 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="leo.ServicioDataBase" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="leo.AppCUI" />
       <recent name="dominio" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Main Integracion">
+    <configuration name="Main Integracion" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="integracion" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="leo.Main" />
       <module name="BankTallerPOOGyL" />
@@ -92,19 +102,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="integracion" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="integracion" />
-      <option name="filePath" />
-      <method v="2" />
-    </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.Main Integracion" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main Integracion" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -125,7 +129,47 @@
       <option name="project" value="LOCAL" />
       <updated>1776369929697</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Feature/17-04/&#10;Se concluyen adaptadores.&#10;Se empieza a trabajar en Mediador e integraciones a cada Banco">
+      <option name="closed" value="true" />
+      <created>1776445306099</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1776445306099</updated>
+    </task>
+    <task id="LOCAL-00003" summary="FEATURE/ 17 - 04 /&#10;Se implementa main de implementación, que carga ambos Bancos en una aplicación">
+      <option name="closed" value="true" />
+      <created>1776448282164</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1776448282164</updated>
+    </task>
+    <task id="LOCAL-00004" summary="FEATURE/ 17 - 04 /&#10;Se crea clase leo.App para evitar repetir código del main">
+      <option name="closed" value="true" />
+      <created>1776468116657</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1776468116657</updated>
+    </task>
+    <task id="LOCAL-00005" summary="FIX/ 18 - 04 /&#10;Finalizo implementaciones en menues">
+      <option name="closed" value="true" />
+      <created>1776553405344</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1776553405344</updated>
+    </task>
+    <task id="LOCAL-00006" summary="FEATURE / 19 - 04 /&#10;Se crea Clase DataBase, que tiene subclase DataBaseInjector. Todas las instancias esperan una clase DataBase para mayor legibilidad">
+      <option name="closed" value="true" />
+      <created>1776632350000</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1776632350000</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -156,7 +200,54 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="FIX/ 16 - 04 /&#10;Arreglo de importaciones en BancoLeonardo" />
-    <option name="LAST_COMMIT_MESSAGE" value="FIX/ 16 - 04 /&#10;Arreglo de importaciones en BancoLeonardo" />
+    <MESSAGE value="Feature/17-04/&#10;Se concluyen adaptadores.&#10;Se empieza a trabajar en Mediador e integraciones a cada Banco" />
+    <MESSAGE value="FEATURE/ 17 - 04 /&#10;Se implementa main de implementación, que carga ambos Bancos en una aplicación" />
+    <MESSAGE value="FEATURE/ 17 - 04 /&#10;Se crea clase leo.App para evitar repetir código del main" />
+    <MESSAGE value="FIX/ 18 - 04 /&#10;Finalizo implementaciones en menues" />
+    <MESSAGE value="FEATURE / 19 - 04 /&#10;Se crea Clase DataBase, que tiene subclase DataBaseInjector. Todas las instancias esperan una clase DataBase para mayor legibilidad" />
+    <option name="LAST_COMMIT_MESSAGE" value="FEATURE / 19 - 04 /&#10;Se crea Clase DataBase, que tiene subclase DataBaseInjector. Todas las instancias esperan una clase DataBase para mayor legibilidad" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/AuditReader.java</url>
+          <line>45</line>
+          <properties class="leo.AppCUI.AuditReader" method="makeListString">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/AuditReader.java</url>
+          <line>37</line>
+          <properties class="leo.AppCUI.AuditReader" method="getAllTransferenciasOfCliente">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/CUI.java</url>
+          <line>324</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/CUI.java</url>
+          <line>306</line>
+          <properties>
+            <option name="lambda-ordinal" value="-1" />
+          </properties>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/BancoLeonardo/src/main/java/leo/AppCUI/CUI.java</url>
+          <line>308</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

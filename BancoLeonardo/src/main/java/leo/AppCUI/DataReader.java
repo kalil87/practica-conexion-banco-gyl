@@ -18,6 +18,7 @@ public class DataReader {
     public ArrayList<String> clientelaToListString(){
         ArrayList<Cliente> clientelaList = new ArrayList<>(source.getClientelaMap().values());
         ArrayList<String> lista = new ArrayList<>();
+        if (clientelaList == null) {return lista;}
         clientelaList.forEach(c -> lista.add(clienteToString(c)));
         return lista;
     }

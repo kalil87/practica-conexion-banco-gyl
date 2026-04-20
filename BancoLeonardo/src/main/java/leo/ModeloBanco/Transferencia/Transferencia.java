@@ -49,9 +49,19 @@ public class Transferencia {
             return this;
         }
 
+        public boolean validar(InterfaceTransferencia auditor){
+            if (this.emisor == null) {return false;}
+            if (this.receptor == null) {return false;}
+            if (this.monto == null ||
+            this.monto == BigDecimal.ZERO) {return false;}
+            return true;
+        }
+
         public Transferencia acreditar(InterfaceTransferencia auditor) {
-            //Validador?
-            //Próximamente, solo en cines.
+            if (!this.validar(auditor)){
+                System.out.println("Problema al validar transferencia, verifique los datos");
+                return null;
+            }
             if (this.transaccion != TipoTransaccion.RETIRO) {
                 receptor.sumarSaldo(monto);
             }
